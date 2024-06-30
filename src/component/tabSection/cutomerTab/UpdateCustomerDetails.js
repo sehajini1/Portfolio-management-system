@@ -25,10 +25,10 @@ export default function UpdateCustomerModal({ open, handleClose, customer }) {
   };
 
   return (
-    <Dialog open={open} onClose={handleClose} >
-      <DialogTitle
-      sx={{padding:"2rem 7rem 1rem 7rem"}}
-      >Update Customer Details</DialogTitle>
+    <Dialog open={open} onClose={handleClose}>
+      <DialogTitle sx={{ padding: "2rem 7rem 1rem 7rem" }}>
+        Update Customer Details
+      </DialogTitle>
       <DialogContent>
         <TextField
           margin="dense"
@@ -46,7 +46,14 @@ export default function UpdateCustomerModal({ open, handleClose, customer }) {
           value={location}
           onChange={(e) => setName(e.target.value)}
         />
-        <Box sx={{ height: "30vh", marginTop: "1rem" ,border: "0.1rem solid #b3b3b3", borderRadius:"0.3rem"}}>
+        <Box
+          sx={{
+            height: "30vh",
+            marginTop: "1rem",
+            border: "0.1rem solid #b3b3b3",
+            borderRadius: "0.3rem",
+          }}
+        >
           {/* <Map
             initialViewState={{
               latitude: 37.8,
@@ -64,13 +71,38 @@ export default function UpdateCustomerModal({ open, handleClose, customer }) {
           </Map> */}
         </Box>
       </DialogContent>
-      <DialogActions>
-        <Button onClick={handleClose}>Cancel</Button>
-        <Button onClick={() => {
-          handleClose();
-        }}>Update</Button>
+      <DialogActions
+      sx={UpdateButtonWrapper}
+      >
+        <Button sx={UpdateButtonStyles} onClick={handleClose}>
+          Cancel
+        </Button>
+        <Button
+          sx={UpdateButtonStyles}
+          onClick={() => {
+            handleClose();
+          }}
+        >
+          Update
+        </Button>
       </DialogActions>
     </Dialog>
   );
 }
 
+const UpdateButtonWrapper={
+    paddingRight:"1.7vw"
+}
+
+const UpdateButtonStyles = {
+  backgroundColor: "#008080",
+  boxShadow: "0px 3px 3px rgba(0, 0, 0, 0.2)",
+  borderRadius: "1rem",
+  fontSize: "0.8rem",
+  color: "#ffffff",
+  padding:"0.7rem 3rem",
+  "&:hover": {
+    backgroundColor: "#0C9E9E",
+  },
+  margin: "0.3vw 0",
+};
