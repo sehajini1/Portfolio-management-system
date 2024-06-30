@@ -152,7 +152,7 @@ const LogingFormContainer = styled.div`
 
 const logingTextStyles = {
   textAlign: "center",
-  color: "#01213f",
+  color: "#174022",
   fontWeight: 600,
   fontSize: "1.6rem",
   margin: "2vw 0 1vw 0",

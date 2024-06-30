@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import LogingForm from '../component/logging/LogingForm'
+import LogingForm from '../component/logingSection/LogingForm'
 
 export default function LogingPage() {
     return(

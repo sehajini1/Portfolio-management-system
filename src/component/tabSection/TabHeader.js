@@ -1,13 +1,12 @@
 import * as React from "react";
 import PropTypes from "prop-types";
-//import SwipeableViews from 'react-swipeable-views';
 import { useTheme } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import Log from '../Pages/LogingPage'
+import CustomerTab from "./CustomerTab";
+import LocationDataTab from "./LocationDataTab";
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -46,13 +45,9 @@ export default function FullWidthTabs() {
     setValue(newValue);
   };
 
-  const handleChangeIndex = (index) => {
-    setValue(index);
-  };
-
   return (
     <Box sx={{ bgcolor: "background.paper", width: "100%" }}>
-      <AppBar position="static">
+      <AppBar position="static" sx={{ bgcolor: "#AEB3AF" }}>
         <Tabs
           value={value}
           onChange={handleChange}
@@ -60,19 +55,15 @@ export default function FullWidthTabs() {
           variant="fullWidth"
           aria-label="full width tabs example"
         >
-          <Tab label="Item One" {...a11yProps(0)} />
-          <Tab label="Item Two" {...a11yProps(1)} />
-          <Tab label="Item Three" {...a11yProps(2)} />
+          <Tab label="Location Data" {...a11yProps(0)} />
+          <Tab label="Customers" {...a11yProps(1)} />
         </Tabs>
       </AppBar>
       <CustomTabPanel value={value} index={0}>
-        Item One
+        <LocationDataTab/>
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
-        Item Two
-      </CustomTabPanel>
-      <CustomTabPanel value={value} index={2}>
-        Item Three
+        <CustomerTab/>
       </CustomTabPanel>
     </Box>
   );

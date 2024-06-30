@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import TabHeader from "../component/TabHeader";
+import TabHeader from "../component/tabSection/TabHeader";
 
 export default function LandingPage() {
   return (
