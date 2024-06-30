@@ -1,27 +1,19 @@
-import './App.css';
-import styled from 'styled-components';
+import styled from "styled-components";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Home from './Pages/LandingPage'
-
+import Home from "./Pages/LandingPage";
+import Loging from "./Pages/LogingPage";
 
 function App() {
   return (
     <>
       <Router>
-        <Content>
-          <Routes>
-            <Route exact path="/" element={<Home />}></Route>
-          </Routes>
-        </Content>
+        <Routes>
+          <Route exact path="/" element={<Loging />}></Route>
+          <Route exact path="/details" element={<Home />}></Route>
+        </Routes>
       </Router>
     </>
   );
 }
-const Content = styled.div`
-  ${
-    "" /* position: absolute;
-  margin-top: 10%; */
-  }
-`;
 
 export default App;
