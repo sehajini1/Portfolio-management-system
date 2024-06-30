@@ -25,7 +25,7 @@ export default function LocationDataTab() {
             id="customername"
             label="Customer name"
             name="customername"
-            autoComplete="username"
+            autoComplete="customername"
             // placeholder="Enter your user name"
             //value={email}
             //error={emailError}
@@ -33,6 +33,30 @@ export default function LocationDataTab() {
             //  emailError && "Ingrese un correo electrónico válido"
             //}
             //onChange={handleEmailChange}
+            FormHelperTextProps={{
+              sx: {
+                bottom: "-20px",
+              },
+            }}
+            InputProps={{
+              style: {
+                color: "#174022",
+              },
+            }}
+          />
+        </Box>
+        <Box>
+        <TextField
+            sx={{ width: "22vw", marginTop: "1rem" }}
+            variant="outlined"
+            margin="normal"
+            required
+            id="location"
+            label="Location Name"
+            name="location"
+            autoComplete="customername"
+            //value={locationName}
+            //onChange={handleLocationNameChange}
             FormHelperTextProps={{
               sx: {
                 bottom: "-20px",
