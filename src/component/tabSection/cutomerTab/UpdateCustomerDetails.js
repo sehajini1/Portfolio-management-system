@@ -8,7 +8,7 @@ import {
   DialogTitle,
   TextField,
 } from "@mui/material";
-//import Map, { Marker } from "react-map-gl";
+import Map, { Marker } from "react-map-gl";
 
 //const MAPBOX_TOKEN = 'your_mapbox_token'; // Replace with your Mapbox token
 
