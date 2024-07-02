@@ -60,10 +60,10 @@ export default function FullWidthTabs() {
         </Tabs>
       </AppBar>
       <CustomTabPanel value={value} index={0}>
-        <LocationDataTab/>
+        <CustomerTab/>
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
-        <CustomerTab/>
+      <LocationDataTab/>
       </CustomTabPanel>
     </Box>
   );
