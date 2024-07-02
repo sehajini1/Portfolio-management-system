@@ -6,17 +6,11 @@ import MapBox from "./CustomerDetailsMap";
 import { useQuery } from '@tanstack/react-query';
 import { getAllMembers } from "../../../API";
 
-// const customerData = [
-//   { name: "John Perera", location: "Gampaha, Sri Lanka" },
-//   { name: "Jane Perera", location: "Colombo, Sri Lanka" },
-//   { name: "Smith Perera", location: "Kandy, Sri Lanka" },
-// ];
-
 export default function CustomerTab() {
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ['members'],
     queryFn: getAllMembers,
-    refetchInterval: 60000, // Refetch every 60 seconds
+    refetchInterval: 60000, 
   });
   console.log(data)
 
@@ -28,6 +22,7 @@ export default function CustomerTab() {
 
   return (
     <CustomerDataWrapper>
+    {customerData.length>0 ? (
       <Box
         sx={{
           display: "flex",
@@ -45,36 +40,26 @@ export default function CustomerTab() {
             overflowY: "auto",
           }}
         >
-          {customerData.length > 0 ? (
-            customerData.map((customer, index) => (
+        
+           { customerData.map((customer, index) => (
               <CustomerDetailsCard
                 sx={{
                   padding: "1rem",
                 }}
                 key={index}
                 name={customer.customerName}
-                location={customer.location}
+                location={`Location Data: ${customer.latitude}, ${customer.longitude}`}
               />
-            ))
-          ) : (
-            <></>
-            //<Typography>No customer data available</Typography>
-          )}
+            ))}
+         
         </Box>
         <Box sx={{ width: "70%", height: "0vh" }}>
         <MapBox/>
-          {/* <Map
-            initialViewState={{
-              longitude: 80.6337,
-              latitude: 7.8731,
-              zoom: 6,
-            }}
-            style={{ width: "100%", height: "100%" }}
-            mapStyle="mapbox://styles/mapbox/streets-v11"
-            mapboxAccessToken="pk.eyJ1Ijoic2VoYWppbmkiLCJhIjoiY2x5MzFkZHJ6MDM5MzJrcjA1MGluNm8zcyJ9.MA91cBKhh_5lyrCs4iLVgQ"
-          /> */}
         </Box>
       </Box>
+    ):(
+      <Typography>No customer data available</Typography>
+    )}
     </CustomerDataWrapper>
   );
 }

@@ -4,7 +4,6 @@ import {
   TextField,
   Button,
   Typography,
-  Grid,
   InputAdornment,
   Box,
 } from "@mui/material";
@@ -20,6 +19,7 @@ import OutlinedInput from "@mui/material/OutlinedInput";
 import { loginUser } from "../../API";
 import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from "react-router-dom";
+import {jwtDecode} from "jwt-decode";
 
 export default function LogingForm() {
   const [username, setUsername] = useState("");
@@ -32,6 +32,10 @@ export default function LogingForm() {
     mutationFn: (credentials) => loginUser(credentials),
     onSuccess: (data) => {
       localStorage.setItem("token", data.token);
+      const decodedToken = jwtDecode(data.token);
+      const userRole = decodedToken.role;
+      localStorage.setItem("role", userRole);
+      console.log(userRole);
       navigate("/details");
     },
     onError: (error) => {
