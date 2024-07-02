@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { environment } from "./enviroments/EnvDev";
 
 const API_URL = 'http://localhost:5000'; 
 
@@ -11,6 +10,8 @@ export const loginUser = async (credentials) => {
   const response = await api.post(`${API_URL}/api/v1/auth/login`, credentials);
   return response.data;
 };
+
+const token = localStorage.getItem('token');
 
 // api.interceptors.response.use(
 //   (response) => response,
@@ -25,29 +26,19 @@ export const loginUser = async (credentials) => {
 // );
 
 export const getAllMembers = async () => {
-  const token = localStorage.getItem('token');
   const response = await api.get(`${API_URL}/api/v1/user/locations`, {
     headers: {
       Authorization: `Bearer ${token}`
     }
   });
   return response.data.data;
+};
 
-  // const membersWithLocation = await Promise.all(response.data.data.map(async (member) => {
-  //   try {
-  //     const geoResponse = await environment.reverseGeocode({
-  //       query: [member.longitude, member.latitude],
-  //       types: ['place']
-  //     }).send();
-
-  //     const features = geoResponse.body.features;
-  //     const location = features.length > 0 ? features[0].place_name : 'Location unavailable';
-  //     return { ...member, location };
-  //   } catch (error) {
-  //     console.error("Error getting location:", error);
-  //     return { ...member, location: "Location unavailable" };
-  //   }
-  // }));
-
-  // return membersWithLocation;
+export const updateMember = async (id, updatedData) => {
+  const response = await api.put(`${API_URL}/api/v1/user/locations/${id}`, updatedData, {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  });
+  return response.data;
 };

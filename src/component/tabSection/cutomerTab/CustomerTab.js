@@ -48,7 +48,8 @@ export default function CustomerTab() {
                 }}
                 key={index}
                 name={customer.customerName}
-                location={`Location Data: ${customer.latitude}, ${customer.longitude}`}
+                latitude={customer.latitude}
+                longitude={customer.longitude}
               />
             ))}
          
