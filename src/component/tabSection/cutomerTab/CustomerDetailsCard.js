@@ -11,9 +11,9 @@ import {
 import React, { useState } from "react";
 import styled from "styled-components";
 import DeleteIcon from "@mui/icons-material/Delete";
-import UpdateCustomerModal from "./UpdateCustomerDetails";
+import UpdateCustomerModal from "./updateCustomerDetails/UpdateCustomerDetails";
 
-export default function CustomerDetailsCard({ name, location }) {
+export default function CustomerDetailsCard({ name, latitude,longitude }) {
     const [open, setOpen] = useState(false);
 
     const handleOpen = () => {
@@ -34,11 +34,17 @@ export default function CustomerDetailsCard({ name, location }) {
             image={CustomerMap}
           /> */}
         <CardContent>
-          <Typography gutterBottom variant="h6" component="div">
+          <Typography gutterBottom component="div" sx={CustomerNameStyle}>
             {name}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            {location}
+            Location Data
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+          Latitude: {latitude}
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+          Longitude: {longitude}
           </Typography>
         </CardContent>
         <CardActions
@@ -52,7 +58,7 @@ export default function CustomerDetailsCard({ name, location }) {
           </Button>
         </CardActions>
       </Card>
-      <UpdateCustomerModal open={open} handleClose={handleClose} customer={{ name, location }} />
+      <UpdateCustomerModal open={open} handleClose={handleClose} customer={{ name, latitude,longitude }} />
     </CustomerCardWrapper>
   );
 }
@@ -78,4 +84,8 @@ const UpdateButtonStyles = {
 
 const DeleteButtonStyle={
     color:"#e60000",
-}
+};
+
+const CustomerNameStyle={
+  fontSize:"0.8rem"
+};

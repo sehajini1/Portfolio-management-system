@@ -4,7 +4,6 @@ import {
   TextField,
   Button,
   Typography,
-  Grid,
   InputAdornment,
   Box,
 } from "@mui/material";
@@ -17,9 +16,43 @@ import InputLabel from "@mui/material/InputLabel";
 import IconButton from "@mui/material/IconButton";
 import Input from "@mui/material/Input";
 import OutlinedInput from "@mui/material/OutlinedInput";
+import { loginUser } from "../../API";
+import { useMutation } from '@tanstack/react-query';
+import { useNavigate } from "react-router-dom";
+import {jwtDecode} from "jwt-decode";
 
 export default function LogingForm() {
-  const [showPassword, setShowPassword] = React.useState(false);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [formError, setFormError] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+   const navigate = useNavigate();
+
+   const loginMutation = useMutation({
+    mutationFn: (credentials) => loginUser(credentials),
+    onSuccess: (data) => {
+      localStorage.setItem("token", data.token);
+      const decodedToken = jwtDecode(data.token);
+      const userRole = decodedToken.role;
+      localStorage.setItem("role", userRole);
+      console.log(userRole);
+      navigate("/details");
+    },
+    onError: (error) => {
+      console.error("Login failed:", error);
+      setFormError("Login failed. Please check your credentials and try again.");
+    },
+  });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setFormError("");
+    if (!username || !password) {
+      setFormError("Please enter both username and password.");
+      return;
+    }
+    loginMutation.mutate({ username, password });
+  };
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -30,7 +63,7 @@ export default function LogingForm() {
   return (
     <LogingWrapper>
       <LogingFormContainer>
-        <form>
+        <form onSubmit={handleSubmit}>
           <Typography component="h1" variant="h5" sx={logingTextStyles}>
             Loging to your account
           </Typography>
@@ -60,7 +93,8 @@ export default function LogingForm() {
                 name="username"
                 autoComplete="username"
                 // placeholder="Enter your user name"
-                //value={email}
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
                 //error={emailError}
                 //helperText={
                 //  emailError && "Ingrese un correo electrónico válido"
@@ -91,6 +125,8 @@ export default function LogingForm() {
               <OutlinedInput
                 id="outlined-adornment-password"
                 type={showPassword ? "text" : "password"}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 endAdornment={
                   <InputAdornment position="end">
                     <IconButton
@@ -108,7 +144,10 @@ export default function LogingForm() {
             </FormControl>
             </Box>
             <LogingButtonContainer>
-            <Button sx={{
+            <Button 
+            type="submit"
+            disabled={loginMutation.isPending}
+            sx={{
               backgroundColor: "#008080",
               width: "20vw",
               boxShadow: "0px 3px 3px rgba(0, 0, 0, 0.2)",
@@ -120,12 +159,17 @@ export default function LogingForm() {
               },
               margin: "0.3vw 0",
             }}
-              onClick={() => {
-                window.location.href = "/details";
-              }}
+              // onClick={() => {
+              //   window.location.href = "/details";
+              // }}
               >
-                Loging
+                {loginMutation.isPending ? "Logging in..." : "Login"}
               </Button>
+              {formError && (
+              <Typography color="error" sx={{ mt: 1 ,alignItems:"center",fontSize:"0.6rem"}}>
+                {formError}
+              </Typography>
+            )}
             </LogingButtonContainer>
           </Box>
         </form>

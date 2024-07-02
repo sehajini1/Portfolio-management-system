@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Button,
@@ -8,15 +8,22 @@ import {
   DialogTitle,
   TextField,
 } from "@mui/material";
+import { updateMember } from "../../../../API";
 import Map, { Marker } from "react-map-gl";
 
 //const MAPBOX_TOKEN = 'your_mapbox_token'; // Replace with your Mapbox token
 
-export default function UpdateCustomerModal({ open, handleClose, customer }) {
+export default function UpdateCustomerModal({ open, handleClose, customer, onUpdate  }) {
   const [name, setName] = useState(customer.name);
   const [location, setLocation] = useState(customer.location);
   const [latitude, setLatitude] = useState(0);
   const [longitude, setLongitude] = useState(0);
+
+  useEffect(() => {
+    setName(customer.customerName);
+    setLatitude(customer.latitude);
+    setLongitude(customer.longitude);
+  }, [customer]);
 
   const handleMapClick = (event) => {
     const [lng, lat] = event.lngLat;
@@ -24,6 +31,22 @@ export default function UpdateCustomerModal({ open, handleClose, customer }) {
     setLongitude(lng);
   };
 
+  const handleUpdate = async () => {
+    try {
+      const updatedData = {
+        customerName: name,
+        latitude,
+        longitude
+      };
+      await updateMember(customer.id, updatedData);
+      onUpdate(); // Callback to refetch data in parent component
+      handleClose();
+    } catch (error) {
+      console.error('Error updating customer:', error);
+      // Handle error (e.g., show error message to user)
+    }
+  };
+  console.log(customer)
   return (
     <Dialog open={open} onClose={handleClose}>
       <DialogTitle sx={{ padding: "2rem 7rem 1rem 7rem" }}>
@@ -35,16 +58,24 @@ export default function UpdateCustomerModal({ open, handleClose, customer }) {
           label="Customer Name"
           type="text"
           fullWidth
-          value={name}
+          value={customer.name}
           onChange={(e) => setName(e.target.value)}
         />
         <TextField
           margin="dense"
-          label="Location"
+          label="Latitude"
           type="text"
           fullWidth
-          value={location}
-          onChange={(e) => setName(e.target.value)}
+          value={customer.latitude}
+          onChange={(e) => setLatitude(e.target.value)}
+        />
+        <TextField
+          margin="dense"
+          label="Longitude"
+          type="text"
+          fullWidth
+          value={customer.longitude}
+          onChange={(e) => setLongitude(e.target.value)}
         />
         <Box
           sx={{
@@ -54,21 +85,7 @@ export default function UpdateCustomerModal({ open, handleClose, customer }) {
             borderRadius: "0.3rem",
           }}
         >
-          {/* <Map
-            initialViewState={{
-              latitude: 37.8,
-              longitude: -122.4,
-              zoom: 14,
-            }}
-            style={{ width: "100%", height: "100%" }}
-            mapStyle="mapbox://styles/mapbox/streets-v11"
-            mapboxAccessToken={MAPBOX_TOKEN}
-            onClick={handleMapClick}
-          >
-            {latitude && longitude && (
-              <Marker longitude={longitude} latitude={latitude} color="red" />
-            )}
-          </Map> */}
+          
         </Box>
       </DialogContent>
       <DialogActions
@@ -80,7 +97,7 @@ export default function UpdateCustomerModal({ open, handleClose, customer }) {
         <Button
           sx={UpdateButtonStyles}
           onClick={() => {
-            handleClose();
+            handleUpdate();
           }}
         >
           Update
