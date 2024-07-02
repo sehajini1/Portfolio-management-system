@@ -3,6 +3,7 @@ import React from "react";
 import styled from "styled-components";
 import CustomerDetailsCard from "./CustomerDetailsCard";
 import Map from "react-map-gl";
+import MapBox from "./CustomerDetailsMap";
 
 const customerData = [
   { name: "John Perera", location: "Gampaha, Sri Lanka" },
@@ -42,7 +43,8 @@ export default function CustomerTab() {
           ))}
         </Box>
         <Box sx={{ width: "70%", height: "0vh" }}>
-          <Map
+        <MapBox/>
+          {/* <Map
             initialViewState={{
               longitude: 80.6337,
               latitude: 7.8731,
@@ -51,7 +53,7 @@ export default function CustomerTab() {
             style={{ width: "100%", height: "100%" }}
             mapStyle="mapbox://styles/mapbox/streets-v11"
             mapboxAccessToken="pk.eyJ1Ijoic2VoYWppbmkiLCJhIjoiY2x5MzFkZHJ6MDM5MzJrcjA1MGluNm8zcyJ9.MA91cBKhh_5lyrCs4iLVgQ"
-          />
+          /> */}
         </Box>
       </Box>
     </CustomerDataWrapper>

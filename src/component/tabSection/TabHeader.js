@@ -6,7 +6,7 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 import CustomerTab from "./cutomerTab/CustomerTab";
-import LocationDataTab from "./LocationDataTab";
+import LocationDataTab from "./locationTab/LocationDataTab";
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;

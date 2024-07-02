@@ -11,7 +11,7 @@ import {
 import React, { useState } from "react";
 import styled from "styled-components";
 import DeleteIcon from "@mui/icons-material/Delete";
-import UpdateCustomerModal from "./UpdateCustomerDetails";
+import UpdateCustomerModal from "./updateCustomerDetails/UpdateCustomerDetails";
 
 export default function CustomerDetailsCard({ name, location }) {
     const [open, setOpen] = useState(false);
