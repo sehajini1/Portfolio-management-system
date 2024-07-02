@@ -97,5 +97,5 @@ map.current.on('mouseleave', 'earthquakes-layer', () => {
 const MapWrapper = styled.div`
     position: absolute;
     height:500px;
-    width:100%;
+    width:38%;
 `;

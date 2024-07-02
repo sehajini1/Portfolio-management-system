@@ -34,7 +34,7 @@ export default function CustomerDetailsCard({ name, location }) {
             image={CustomerMap}
           /> */}
         <CardContent>
-          <Typography gutterBottom variant="h6" component="div">
+          <Typography gutterBottom component="div" sx={CustomerNameStyle}>
             {name}
           </Typography>
           <Typography variant="body2" color="text.secondary">
@@ -78,4 +78,8 @@ const UpdateButtonStyles = {
 
 const DeleteButtonStyle={
     color:"#e60000",
-}
+};
+
+const CustomerNameStyle={
+  fontSize:"0.8rem"
+};

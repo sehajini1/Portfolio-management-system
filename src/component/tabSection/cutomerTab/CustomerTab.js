@@ -1,17 +1,31 @@
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import React from "react";
 import styled from "styled-components";
 import CustomerDetailsCard from "./CustomerDetailsCard";
-import Map from "react-map-gl";
 import MapBox from "./CustomerDetailsMap";
+import { useQuery } from '@tanstack/react-query';
+import { getAllMembers } from "../../../API";
 
-const customerData = [
-  { name: "John Perera", location: "Gampaha, Sri Lanka" },
-  { name: "Jane Perera", location: "Colombo, Sri Lanka" },
-  { name: "Smith Perera", location: "Kandy, Sri Lanka" },
-];
+// const customerData = [
+//   { name: "John Perera", location: "Gampaha, Sri Lanka" },
+//   { name: "Jane Perera", location: "Colombo, Sri Lanka" },
+//   { name: "Smith Perera", location: "Kandy, Sri Lanka" },
+// ];
 
 export default function CustomerTab() {
+  const { data, isLoading, isError, error } = useQuery({
+    queryKey: ['members'],
+    queryFn: getAllMembers,
+    refetchInterval: 60000, // Refetch every 60 seconds
+  });
+  console.log(data)
+
+  if (isLoading) return <div>Loading...</div>;
+  if (isError) return <div>Error: {error.message}</div>;
+
+  const customerData = Array.isArray(data) ? data : [];
+  console.log(customerData)
+
   return (
     <CustomerDataWrapper>
       <Box
@@ -31,16 +45,21 @@ export default function CustomerTab() {
             overflowY: "auto",
           }}
         >
-          {customerData.map((customer, index) => (
-            <CustomerDetailsCard
-              sx={{
-                padding: "1rem",
-              }}
-              key={index}
-              name={customer.name}
-              location={customer.location}
-            />
-          ))}
+          {customerData.length > 0 ? (
+            customerData.map((customer, index) => (
+              <CustomerDetailsCard
+                sx={{
+                  padding: "1rem",
+                }}
+                key={index}
+                name={customer.customerName}
+                location={customer.location}
+              />
+            ))
+          ) : (
+            <></>
+            //<Typography>No customer data available</Typography>
+          )}
         </Box>
         <Box sx={{ width: "70%", height: "0vh" }}>
         <MapBox/>
