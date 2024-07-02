@@ -54,7 +54,7 @@ export default function CustomerTab() {
          
         </Box>
         <Box sx={{ width: "70%", height: "0vh" }}>
-        <MapBox/>
+        <MapBox customers={customerData}/>
         </Box>
       </Box>
     ):(

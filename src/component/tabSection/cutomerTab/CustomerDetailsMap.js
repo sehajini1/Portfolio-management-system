@@ -6,12 +6,12 @@ import styled from "styled-components";
 
 mapboxgl.accessToken = environment.mapbox.accessToken;
 
-export default function CustomerDetailsMap() {
+export default function CustomerDetailsMap({customers}) {
   const mapContainerRef = useRef(null);
   const map = useRef(null);
 
-  const [lng] = useState(-97.7431);
-  const [lat] = useState(30.2672);
+  const [lng] = useState(80.6337);
+  const [lat] = useState(7.8731);
   const [zoom] = useState(2);
 
   // Initialize map when component mounts
@@ -31,16 +31,26 @@ export default function CustomerDetailsMap() {
       // Nifty code to force map to fit inside container when it loads
       map.current.resize();
 
-      map.current.addSource('earthquakes', {
+      map.current.addSource('customers', {
         type: 'geojson',
-        // Use a URL for the value for the `data` property.
-        data: 'https://docs.mapbox.com/mapbox-gl-js/assets/earthquakes.geojson'
+        data: {
+          type: 'FeatureCollection',
+          features: customers.map(customer => ({
+            type: 'Feature',
+            geometry: {
+              type: 'Point',
+              coordinates: [customer.longitude, customer.latitude]
+            },
+            properties: {
+              id: customer.id,
+              name: customer.customerName
+            }}))}
       });
       
       map.current.addLayer({
-        'id': 'earthquakes-layer',
+        'id': 'customers-layer',
         'type': 'circle',
-        'source': 'earthquakes',
+        'source': 'customers',
         'paint': {
           'circle-radius': 4,
           'circle-stroke-width': 2,
@@ -55,10 +65,8 @@ export default function CustomerDetailsMap() {
     closeOnClick: false
 });
 
-// Here's on Popup window code
-// When the cursor moves over the earthquake layer
-map.current.on('mouseenter', 'earthquakes-layer', (e) => {
-    // Change the cursor style as a UI indicator.
+
+map.current.on('mouseenter', 'customers-layer', (e) => {
     map.current.getCanvas().style.cursor = 'pointer';
      
     // Copy coordinates array.
@@ -66,21 +74,21 @@ map.current.on('mouseenter', 'earthquakes-layer', (e) => {
     const properties = e.features[0].properties;
 
     // build our popup html with our geoJSON properties
-    const popupHtml = `<strong>${properties.id}</strong><br><strong>Magnitude:</strong><p>${properties.mag}</p><br><strong>Date:</strong>${new Date(properties.time)}`
+    const popupHtml = `<strong>${properties.name}</strong>`
      
     // Ensure that if the map is zoomed out such that multiple
     // copies of the feature are visible, the popup appears
     // over the copy being pointed to.
-    while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-        coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-    }
+   while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+         coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+     }
      
     // Populate the popup and set its coordinates
     // based on the feature found.
     popup.setLngLat(coordinates).setHTML(popupHtml).addTo(map.current);
 });
 // Whe the cursor moves off the layer we remove the cursor
-map.current.on('mouseleave', 'earthquakes-layer', () => {
+map.current.on('mouseleave', 'customers-layer', () => {
     map.current.getCanvas().style.cursor = '';
     popup.remove();
 });
@@ -88,7 +96,7 @@ map.current.on('mouseleave', 'earthquakes-layer', () => {
 
     // Clean up on unmount
     return () => map.current.remove();
-  }, [lat, lng, zoom]);
+  }, [lat, lng, zoom,customers]);
   return (
     <MapWrapper ref={mapContainerRef} /> 
   );
