@@ -35,10 +35,10 @@ export const getAllMembers = async () => {
 };
 
 export const updateMember = async (id, updatedData) => {
-  const response = await api.put(`${API_URL}/api/v1/user/locations/${id}`, updatedData, {
+  const response = await api.patch(`${API_URL}/api/v1/user/location/${id}`, updatedData, {
     headers: {
       Authorization: `Bearer ${token}`
     }
   });
-  return response.data;
+  return response.data.data;
 };

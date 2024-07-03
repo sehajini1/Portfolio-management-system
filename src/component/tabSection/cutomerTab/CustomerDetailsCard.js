@@ -13,7 +13,7 @@ import styled from "styled-components";
 import DeleteIcon from "@mui/icons-material/Delete";
 import UpdateCustomerModal from "./updateCustomerDetails/UpdateCustomerDetails";
 
-export default function CustomerDetailsCard({ name, latitude,longitude }) {
+export default function CustomerDetailsCard({ _id,customerName, latitude,longitude }) {
     const [open, setOpen] = useState(false);
 
     const handleOpen = () => {
@@ -35,7 +35,7 @@ export default function CustomerDetailsCard({ name, latitude,longitude }) {
           /> */}
         <CardContent>
           <Typography gutterBottom component="div" sx={CustomerNameStyle}>
-            {name}
+            {customerName}
           </Typography>
           <Typography variant="body2" color="text.secondary">
             Location Data
@@ -58,7 +58,7 @@ export default function CustomerDetailsCard({ name, latitude,longitude }) {
           </Button>
         </CardActions>
       </Card>
-      <UpdateCustomerModal open={open} handleClose={handleClose} customer={{ name, latitude,longitude }} />
+      <UpdateCustomerModal open={open} handleClose={handleClose} customer={{ _id, customerName, latitude,longitude }} />
     </CustomerCardWrapper>
   );
 }

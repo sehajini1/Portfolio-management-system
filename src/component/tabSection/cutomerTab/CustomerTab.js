@@ -47,7 +47,8 @@ export default function CustomerTab() {
                   padding: "1rem",
                 }}
                 key={index}
-                name={customer.customerName}
+                _id={customer._id}
+                customerName={customer.customerName}
                 latitude={customer.latitude}
                 longitude={customer.longitude}
               />
