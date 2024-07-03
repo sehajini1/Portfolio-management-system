@@ -6,6 +6,7 @@ import MapBox from "./CustomerDetailsMap";
 import { useQuery } from "@tanstack/react-query";
 import { getAllMembers } from "../../../API";
 import SearchIcon from "@mui/icons-material/Search";
+import ReactSearchBox from "react-search-box";
 
 export default function CustomerTab() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -30,11 +31,7 @@ export default function CustomerTab() {
   );
 
   const containerHeight =
-    customerData.length > MAX_CARDS_WITHOUT_SCROLL
-      ? "75vh" // Fixed height when scrolling is needed
-      : "auto"; // Auto height when all cards can fit without scrolling
-
-  
+  filteredCustomers.length > MAX_CARDS_WITHOUT_SCROLL ? "75vh" : "auto";
 
   return (
     <CustomerDataWrapper>
@@ -62,24 +59,38 @@ export default function CustomerTab() {
               padding: "0.5rem",
             }}
           >
-            {/* <SearchBar /> */}
-
-            {customerData.map((customer, index) => (
+            <ReactSearchBox
+              placeholder="Search by customer name"
+              value={searchTerm}
+              data={customerData.map((customer) => ({
+                key: customer._id,
+                value: customer.customerName,
+              }))}
+              onChange={(value) => setSearchTerm(value)}
+              onSelect={(record) => setSearchTerm(record.item.value)}
+              fuseConfigs={{
+                threshold: 0.05,
+              }}
+            />
+            {filteredCustomers.map((customer,index) => (
+              
               <CustomerDetailsCard
                 sx={{
                   padding: "1rem",
                   flexShrink: 0,
                 }}
-                key={index}
+                key={customer._id || index}
                 _id={customer._id}
                 customerName={customer.customerName}
                 latitude={customer.latitude}
                 longitude={customer.longitude}
               />
+            
             ))}
+            
           </Box>
           <Box sx={{ width: "70%", height: containerHeight }}>
-            <MapBox customers={customerData} />
+            <MapBox customers={filteredCustomers} />
           </Box>
         </Box>
       ) : (
