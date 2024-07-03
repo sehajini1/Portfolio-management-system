@@ -1,11 +1,10 @@
-import { Box, InputAdornment, TextField, Typography } from "@mui/material";
+import { Box,  Typography } from "@mui/material";
 import React, { useState } from "react";
 import styled from "styled-components";
 import CustomerDetailsCard from "./CustomerDetailsCard";
 import MapBox from "./CustomerDetailsMap";
 import { useQuery } from "@tanstack/react-query";
 import { getAllMembers } from "../../../API";
-import SearchIcon from "@mui/icons-material/Search";
 import ReactSearchBox from "react-search-box";
 
 export default function CustomerTab() {
@@ -18,7 +17,7 @@ export default function CustomerTab() {
   });
   console.log(data);
 
-  const MAX_CARDS_WITHOUT_SCROLL = 3;
+  const MAX_CARDS_WITHOUT_SCROLL = 2;
 
   if (isLoading) return <div>Loading...</div>;
   if (isError) return <div>Error: {error.message}</div>;
@@ -59,8 +58,17 @@ export default function CustomerTab() {
               padding: "0.5rem",
             }}
           >
+            <Box
+            sx={{
+              position: "sticky",
+              top: 0,
+              zIndex: 1,
+              backgroundColor: "background.paper",
+              padding: "0.1rem",
+            }}
+          >
             <ReactSearchBox
-              placeholder="Search by customer name"
+              placeholder="Search customer"
               value={searchTerm}
               data={customerData.map((customer) => ({
                 key: customer._id,
@@ -71,7 +79,10 @@ export default function CustomerTab() {
               fuseConfigs={{
                 threshold: 0.05,
               }}
+              inputFontSize="14px"
+              inputHeight="40px"
             />
+          </Box>
             {filteredCustomers.map((customer,index) => (
               
               <CustomerDetailsCard
