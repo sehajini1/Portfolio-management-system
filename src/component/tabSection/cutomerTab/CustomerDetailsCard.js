@@ -19,6 +19,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import UpdateCustomerModal from "./updateCustomerDetails/UpdateCustomerDetails";
 import { deleteMember } from "../../../API";
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { toast } from 'react-toastify';
 
 export default function CustomerDetailsCard({ _id,customerName, latitude,longitude }) {
     const [open, setOpen] = useState(false);
@@ -29,9 +30,9 @@ export default function CustomerDetailsCard({ _id,customerName, latitude,longitu
     const deleteMutation = useMutation({
       mutationFn: deleteMember,
       onSuccess: () => {
-        // Invalidate and refetch
         queryClient.invalidateQueries(['customers']);
         handleCloseLogoutDialog();
+        toast.warning("Selected member is deleted.");
       },
     });
 
