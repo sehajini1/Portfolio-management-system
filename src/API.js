@@ -51,3 +51,13 @@ export const addLocation = async (locationData) => {
   });
   return response.data.data;
 };
+
+export const deleteMember = async (id) => {
+  const token = localStorage.getItem('token');
+  const response = await api.delete(`${API_URL}/api/v1/user/locations/${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  });
+  return response.data.data;
+};
