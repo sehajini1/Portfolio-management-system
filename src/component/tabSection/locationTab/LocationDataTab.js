@@ -43,8 +43,19 @@ export default function LocationDataTab() {
       <Typography component="h1" variant="h5" sx={locationTextStyles}>
         Add the location details
       </Typography>
-      <Box>
-        <Box>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "row",
+          gap: "2rem",
+        }}
+      >
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
           <TextField
             sx={{
               width: "22vw",
@@ -75,13 +86,16 @@ export default function LocationDataTab() {
             //   },
             // }}
           />
-        </Box>
-        <Box>
+          <Typography sx={{ fontSize: "0.8rem", marginTop: "3vh" }}>
+            Select your location using the map
+          </Typography>
+
           <TextField
             sx={{ width: "22vw", marginTop: "1rem" }}
             variant="outlined"
             margin="normal"
             required
+            disabled
             id="latitude"
             label="Latitude"
             name="latitude"
@@ -99,12 +113,12 @@ export default function LocationDataTab() {
             //   },
             // }}
           />
-        </Box>
-        <Box>
+
           <TextField
             sx={{ width: "22vw", marginTop: "1rem" }}
             variant="outlined"
             margin="normal"
+            disabled
             required
             id="longitude"
             label="Longitude"
@@ -124,18 +138,18 @@ export default function LocationDataTab() {
             // }}
           />
         </Box>
-        <Box sx={{ marginTop: "2rem", width: "100%" }}>
+        <Box sx={{ marginTop: "1rem", width: "100%" }}>
           <AddMapComponent onLocationSelect={handleLocationSelect} />
         </Box>
-        <Button
-          type="submit"
-          onClick={handleSubmit}
-          sx={AddButtonStyles}
-          disabled={addLocationMutation.isLoading}
-        >
-          {addLocationMutation.isLoading ? "Adding..." : "Add Location"}
-        </Button>
       </Box>
+      <Button
+        type="submit"
+        onClick={handleSubmit}
+        sx={AddButtonStyles}
+        disabled={addLocationMutation.isLoading}
+      >
+        {addLocationMutation.isLoading ? "Adding..." : "Add Location"}
+      </Button>
       {addLocationMutation.isError && (
         <Typography color="error">
           An error occurred: {addLocationMutation.error.message}
@@ -154,11 +168,12 @@ const locationTextStyles = {
   color: "#174022",
   fontWeight: 600,
   fontSize: "1.1rem",
-  margin: "2vw 0 1vw 0",
+  margin: "0 0 1vw 0",
 };
 
 const AddButtonStyles = {
   backgroundColor: "#008080",
+  width: "22vw",
   boxShadow: "0px 3px 3px rgba(0, 0, 0, 0.2)",
   borderRadius: "1rem",
   fontSize: "0.8rem",
@@ -167,5 +182,4 @@ const AddButtonStyles = {
   "&:hover": {
     backgroundColor: "#0C9E9E",
   },
-  margin: "0.3vw 0",
 };
