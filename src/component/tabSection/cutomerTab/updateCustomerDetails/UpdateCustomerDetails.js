@@ -13,20 +13,19 @@ import Map, { Marker } from "react-map-gl";
 
 //const MAPBOX_TOKEN = 'your_mapbox_token'; // Replace with your Mapbox token
 
-export default function UpdateCustomerModal({ open, handleClose, customer, onUpdate  }) {
-  const [name, setName] = useState('');
-  const [latitude, setLatitude] = useState('');
-  const [longitude, setLongitude] = useState('');
-  const [error, setError] = useState('');
-  console.log("jj",customer._id)
+export default function UpdateCustomerModal({open,handleClose,customer,onUpdate,}) {
+  const [name, setName] = useState("");
+  const [latitude, setLatitude] = useState("");
+  const [longitude, setLongitude] = useState("");
+  const [error, setError] = useState("");
+  console.log("jj", open,handleClose);
   useEffect(() => {
-    console.log('Customer prop changed:', customer);
-    if(customer){
-      setName(customer.customerName || '');
-      setLatitude(customer.latitude || '');
-      setLongitude(customer.longitude || '');
+    console.log("Customer prop changed:", customer);
+    if (customer) {
+      setName(customer.customerName || "");
+      setLatitude(customer.latitude || "");
+      setLongitude(customer.longitude || "");
     }
-    
   }, [customer]);
 
   const handleMapClick = (event) => {
@@ -36,22 +35,24 @@ export default function UpdateCustomerModal({ open, handleClose, customer, onUpd
   };
 
   const handleUpdate = async () => {
-    setError('');
+    setError("");
     try {
       const updatedData = {
         customerName: name,
-        latitude:latitude,
-        longitude:longitude
+        latitude: latitude,
+        longitude: longitude,
       };
       await updateMember(customer._id, updatedData);
-      onUpdate(); // Callback to refetch data in parent component
+      console.log("kaka")
+      //onUpdate(); // Callback to refetch data in parent component
+      console.log("lalal")
       handleClose();
     } catch (error) {
-      console.error('Error updating customer:', error);
-      setError('Failed to update customer.Please try again');
+      console.error("Error updating customer:", error);
+      setError("Failed to update customer.Please try again");
     }
   };
-  console.log(customer)
+  console.log(customer);
   return (
     <Dialog open={open} onClose={handleClose}>
       <DialogTitle sx={{ padding: "2rem 7rem 1rem 7rem" }}>
@@ -89,22 +90,13 @@ export default function UpdateCustomerModal({ open, handleClose, customer, onUpd
             border: "0.1rem solid #b3b3b3",
             borderRadius: "0.3rem",
           }}
-        >
-          
-        </Box>
+        ></Box>
       </DialogContent>
-      <DialogActions
-      sx={UpdateButtonWrapper}
-      >
+      <DialogActions sx={UpdateButtonWrapper}>
         <Button sx={UpdateButtonStyles} onClick={handleClose}>
           Cancel
         </Button>
-        <Button
-          sx={UpdateButtonStyles}
-          onClick={
-            handleUpdate
-          }
-        >
+        <Button sx={UpdateButtonStyles} onClick={handleUpdate}>
           Update
         </Button>
       </DialogActions>
@@ -112,9 +104,9 @@ export default function UpdateCustomerModal({ open, handleClose, customer, onUpd
   );
 }
 
-const UpdateButtonWrapper={
-    paddingRight:"1.7vw"
-}
+const UpdateButtonWrapper = {
+  paddingRight: "1.7vw",
+};
 
 const UpdateButtonStyles = {
   backgroundColor: "#008080",
@@ -122,7 +114,7 @@ const UpdateButtonStyles = {
   borderRadius: "1rem",
   fontSize: "0.8rem",
   color: "#ffffff",
-  padding:"0.7rem 3rem",
+  padding: "0.7rem 3rem",
   "&:hover": {
     backgroundColor: "#0C9E9E",
   },
