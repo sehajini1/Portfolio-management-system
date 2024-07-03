@@ -4,6 +4,7 @@ import styled from "styled-components";
 import AddMapComponent from "./AddLocationDataMap";
 import { addLocation } from "../../../API";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { toast } from 'react-toastify';
 
 export default function LocationDataTab() {
   const [customerName, setCustomerName] = useState("");
@@ -21,7 +22,11 @@ export default function LocationDataTab() {
       setCustomerName("");
       setLatitude("");
       setLongitude("");
+      toast.success('Location added successfully!');
     },
+    onError:(error)=>{
+      toast.error(`An error occurred: ${error.message}`);
+    }
   });
 
   const handleLocationSelect = (lat, lng) => {
@@ -150,14 +155,14 @@ export default function LocationDataTab() {
       >
         {addLocationMutation.isLoading ? "Adding..." : "Add Location"}
       </Button>
-      {addLocationMutation.isError && (
+      {/* {addLocationMutation.isError && (
         <Typography color="error">
           An error occurred: {addLocationMutation.error.message}
         </Typography>
       )}
       {addLocationMutation.isSuccess && (
         <Typography color="success">Location added successfully!</Typography>
-      )}
+      )} */}
     </LocationDataWrapper>
   );
 }
