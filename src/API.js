@@ -42,3 +42,12 @@ export const updateMember = async (id, updatedData) => {
   });
   return response.data.data;
 };
+
+export const addLocation = async (locationData) => {
+  const response = await api.post(`${API_URL}/api/v1/user/locations`, locationData, {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  });
+  return response.data.data;
+};
