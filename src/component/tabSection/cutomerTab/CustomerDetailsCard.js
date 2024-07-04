@@ -24,6 +24,7 @@ export default function CustomerDetailsCard({
   customerName,
   latitude,
   longitude,
+  sx
 }) {
   const [open, setOpen] = useState(false);
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
@@ -70,8 +71,11 @@ export default function CustomerDetailsCard({
 
   return (
     <CustomerCardWrapper>
-      <Card sx={{ width: "20vw",
+      <Card sx={{ ...sx,width: "20vw",
        bgcolor: "#e6ffff",
+       "@media (max-width: 800px)": {
+                width:"50vw"
+              },
 }}>
         <CardContent>
           <Typography gutterBottom component="div" sx={CustomerNameStyle}>

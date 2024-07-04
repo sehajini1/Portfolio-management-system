@@ -60,7 +60,7 @@ export default function CustomerTab() {
               },
               "@media (max-width: 800px)": {
                 width: "100%",
-                height: "50vh",
+                height: "40vh",
               },
             }}
           >
@@ -80,7 +80,6 @@ export default function CustomerTab() {
               padding: "0rem 0.5rem 0.5rem 0",
               "@media (max-width: 800px)": {
                 width: "100%",
-                maxWidth: "800px", // Adjust this value as needed
                 alignItems: "center",
               },
             }}
@@ -128,12 +127,11 @@ export default function CustomerTab() {
             {filteredCustomers.map((customer, index) => (
               <CustomerDetailsCard
                 sx={{
-                  flexBasis: "calc(50% - 0.5rem)", // 2 cards per row
                   flexGrow: 0,
                   flexShrink: 0,
                   "@media (max-width: 800px)": {
-                    flexBasis: "100%",
-                  },
+                width:"100%"
+              },
                 }}
                 key={customer._id || index}
                 _id={customer._id}
