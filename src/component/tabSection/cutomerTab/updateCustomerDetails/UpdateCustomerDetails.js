@@ -11,8 +11,12 @@ import {
 import { updateMember } from "../../../../API";
 import AddLocationDataMap from "../../locationTab/AddLocationDataMap";
 
-
-export default function UpdateCustomerModal({open,handleClose,customer,onUpdate,}) {
+export default function UpdateCustomerModal({
+  open,
+  handleClose,
+  customer,
+  onUpdate,
+}) {
   const [name, setName] = useState("");
   const [latitude, setLatitude] = useState("");
   const [longitude, setLongitude] = useState("");
@@ -29,7 +33,7 @@ export default function UpdateCustomerModal({open,handleClose,customer,onUpdate,
   const handleLocationSelect = (lat, lng) => {
     setLatitude(lat.toFixed(6));
     setLongitude(lng.toFixed(6));
-  }
+  };
 
   const handleUpdate = async () => {
     setError("");
@@ -40,9 +44,11 @@ export default function UpdateCustomerModal({open,handleClose,customer,onUpdate,
         longitude: longitude,
       };
       await updateMember(customer._id, updatedData);
-      console.log("kaka")
-      onUpdate(); // Callback to refetch data in parent component
-      console.log("lalal")
+      console.log("kaka");
+      if (typeof onUpdate === 'function') {
+        onUpdate();
+      }
+      console.log("lalal");
       handleClose();
     } catch (error) {
       console.error("Error updating customer:", error);
@@ -90,11 +96,11 @@ export default function UpdateCustomerModal({open,handleClose,customer,onUpdate,
             borderRadius: "0.3rem",
           }}
         >
-          <AddLocationDataMap 
-  onLocationSelect={handleLocationSelect}
-  initialLat={parseFloat(customer?.latitude)}
-  initialLng={parseFloat(customer?.longitude)}
-/>
+          <AddLocationDataMap
+            onLocationSelect={handleLocationSelect}
+            initialLat={parseFloat(customer?.latitude)}
+            initialLng={parseFloat(customer?.longitude)}
+          />
         </Box>
       </DialogContent>
       <DialogActions sx={UpdateButtonWrapper}>

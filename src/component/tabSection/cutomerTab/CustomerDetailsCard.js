@@ -16,44 +16,54 @@ import styled from "styled-components";
 import DeleteIcon from "@mui/icons-material/Delete";
 import UpdateCustomerModal from "./updateCustomerDetails/UpdateCustomerDetails";
 import { deleteMember } from "../../../API";
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { toast } from 'react-toastify';
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { toast } from "react-toastify";
 
-export default function CustomerDetailsCard({ _id,customerName, latitude,longitude }) {
-    const [open, setOpen] = useState(false);
-    const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
+export default function CustomerDetailsCard({
+  _id,
+  customerName,
+  latitude,
+  longitude,
+}) {
+  const [open, setOpen] = useState(false);
+  const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
 
-    const queryClient = useQueryClient();
+  const queryClient = useQueryClient();
 
-    const deleteMutation = useMutation({
-      mutationFn: deleteMember,
-      onSuccess: () => {
-        queryClient.invalidateQueries(['customers']);
-        handleCloseLogoutDialog();
-        toast.warning("Selected member is deleted.");
-      },
-    });
+  const deleteMutation = useMutation({
+    mutationFn: deleteMember,
+    onSuccess: () => {
+      queryClient.invalidateQueries(["customers"]);
+      handleCloseLogoutDialog();
+      toast.warning("Selected member is deleted.");
+    },
+  });
 
-    const handleOpen = () => {
-        setOpen(true);
-      };
-    
-      const handleClose = () => {
-        setOpen(false);
-      };
+  const handleOpen = () => {
+    setOpen(true);
+  };
 
-      const handleDeleteClick = () => {
-        setOpenDeleteDialog(true);
-      };
-    
-      const handleCloseLogoutDialog = () => {
-        setOpenDeleteDialog(false);
-      };
+  const handleClose = () => {
+    setOpen(false);
+  };
 
-      const handleDelete = () => {
-        deleteMutation.mutate(_id);
-        setOpenDeleteDialog(false);
-      };
+  const handleDeleteClick = () => {
+    setOpenDeleteDialog(true);
+  };
+
+  const handleCloseLogoutDialog = () => {
+    setOpenDeleteDialog(false);
+  };
+
+  const handleDelete = () => {
+    deleteMutation.mutate(_id);
+    setOpenDeleteDialog(false);
+  };
+
+  const handleCustomerUpdate = () => {
+    queryClient.invalidateQueries(["customers"]);
+    toast.success("Customer updated successfully.");
+  };
 
   return (
     <CustomerCardWrapper>
@@ -72,24 +82,28 @@ export default function CustomerDetailsCard({ _id,customerName, latitude,longitu
             Location Data
           </Typography>
           <Typography variant="body2" color="text.secondary">
-          Latitude: {latitude}
+            Latitude: {latitude}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-          Longitude: {longitude}
+            Longitude: {longitude}
           </Typography>
         </CardContent>
-        <CardActions
-            sx={ButtonStyles}
-        >
+        <CardActions sx={ButtonStyles}>
           <IconButton aria-label="delete" onClick={handleDeleteClick}>
-            <DeleteIcon sx={DeleteButtonStyle}/>
+            <DeleteIcon sx={DeleteButtonStyle} />
           </IconButton>
           <Button sx={UpdateButtonStyles} size="small" onClick={handleOpen}>
             Update
           </Button>
         </CardActions>
       </Card>
-      <UpdateCustomerModal open={open} handleClose={handleClose} customer={{ _id, customerName, latitude,longitude }} />
+      <UpdateCustomerModal
+        open={open}
+        handleClose={handleClose}
+        customer={{ _id, customerName, latitude, longitude }}
+        onUpdate={handleCustomerUpdate}
+        
+      />
       <Dialog
         open={openDeleteDialog}
         onClose={handleCloseLogoutDialog}
@@ -101,20 +115,25 @@ export default function CustomerDetailsCard({ _id,customerName, latitude,longitu
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-          Are you sure you want to delete it?
+            Are you sure you want to delete it?
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button 
-          sx={{
-            color:"#008080"
-          }} 
-          onClick={handleCloseLogoutDialog}>Cancel</Button>
-          <Button 
-          sx={{
-            color:"#008080"
-          }} 
-          onClick={handleDelete} autoFocus>
+          <Button
+            sx={{
+              color: "#008080",
+            }}
+            onClick={handleCloseLogoutDialog}
+          >
+            Cancel
+          </Button>
+          <Button
+            sx={{
+              color: "#008080",
+            }}
+            onClick={handleDelete}
+            autoFocus
+          >
             Delete
           </Button>
         </DialogActions>
@@ -125,10 +144,10 @@ export default function CustomerDetailsCard({ _id,customerName, latitude,longitu
 
 const CustomerCardWrapper = styled.div``;
 
-const ButtonStyles ={
-    display:"flex",
-    justifyContent:"space-between"
-}
+const ButtonStyles = {
+  display: "flex",
+  justifyContent: "space-between",
+};
 
 const UpdateButtonStyles = {
   backgroundColor: "#008080",
@@ -142,10 +161,10 @@ const UpdateButtonStyles = {
   },
 };
 
-const DeleteButtonStyle={
-    color:"#e60000",
+const DeleteButtonStyle = {
+  color: "#e60000",
 };
 
-const CustomerNameStyle={
-  fontSize:"0.8rem"
+const CustomerNameStyle = {
+  fontSize: "0.8rem",
 };
