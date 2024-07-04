@@ -149,7 +149,8 @@ export default function LogingForm() {
             disabled={loginMutation.isPending}
             sx={{
               backgroundColor: "#008080",
-              width: "20vw",
+              width: "22vw",
+              height:"8vh",
               boxShadow: "0px 3px 3px rgba(0, 0, 0, 0.2)",
               borderRadius: "1rem",
               fontSize: "1rem",
@@ -166,7 +167,7 @@ export default function LogingForm() {
                 {loginMutation.isPending ? "Logging in..." : "Login"}
               </Button>
               {formError && (
-              <Typography color="error" sx={{ mt: 1 ,alignItems:"center",fontSize:"0.6rem"}}>
+              <Typography color="error" sx={{ mt: 1 ,alignItems:"center",fontSize:"0.7rem"}}>
                 {formError}
               </Typography>
             )}

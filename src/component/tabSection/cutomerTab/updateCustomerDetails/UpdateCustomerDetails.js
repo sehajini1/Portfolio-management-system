@@ -9,9 +9,7 @@ import {
   TextField,
 } from "@mui/material";
 import { updateMember } from "../../../../API";
-import Map, { Marker } from "react-map-gl";
 
-//const MAPBOX_TOKEN = 'your_mapbox_token'; // Replace with your Mapbox token
 
 export default function UpdateCustomerModal({open,handleClose,customer,onUpdate,}) {
   const [name, setName] = useState("");

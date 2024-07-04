@@ -1,10 +1,8 @@
 import {
-  Box,
   Button,
   Card,
   CardActions,
   CardContent,
-  CardMedia,
   Dialog,
   DialogActions,
   DialogContent,
