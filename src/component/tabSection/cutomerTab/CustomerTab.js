@@ -77,7 +77,7 @@ export default function CustomerTab() {
                 customerData.length > MAX_CARDS_WITHOUT_SCROLL
                   ? "auto"
                   : "visible",
-              padding: "0.5rem 0.5rem 0.5rem 0",
+              padding: "0rem 0.5rem 0.5rem 0",
               "@media (max-width: 800px)": {
                 width: "100%",
                 maxWidth: "800px", // Adjust this value as needed
@@ -89,9 +89,9 @@ export default function CustomerTab() {
               sx={{
                 position: "sticky",
                 top: 0,
-                zIndex: 1,
+                zIndex: 2,
                 backgroundColor: "background.paper",
-                padding: "0.1rem",
+                padding: " 0 0.1rem",
                 width: "100%",
               }}
             >
@@ -109,6 +109,7 @@ export default function CustomerTab() {
                 }}
                 inputFontSize="0.87rem"
                 inputHeight="2.5rem"
+                
               />
             </Box>
             <Box
