@@ -58,7 +58,22 @@ export default function LogingForm() {
     <LogingWrapper>
       <LogingFormContainer>
         <form onSubmit={handleSubmit}>
-          <Typography component="h1" variant="h5" sx={logingTextStyles}>
+          <Typography
+            component="h1"
+            variant="h5"
+            sx={{
+              ...logingTextStyles,
+              "@media (max-width: 1000px)": {
+                fontSize: "1.5rem",
+              },
+              "@media (max-width: 850px)": {
+                fontSize: "1.4rem",
+              },
+              "@media (max-width: 700px)": {
+                fontSize: "1.3rem",
+              },
+            }}
+          >
             Loging to your account
           </Typography>
           <Box
@@ -78,6 +93,24 @@ export default function LogingForm() {
               <TextField
                 sx={{
                   width: "22vw",
+                  "@media (max-width: 1100px)": {
+                    width: "27vw",
+                  },
+                  "@media (max-width: 810px)": {
+                    width: "30vw",
+                  },
+                  "@media (max-width: 750px)": {
+                    width: "35vw",
+                  },
+                  "@media (max-width: 670px)": {
+                    width: "40vw",
+                  },
+                  "@media (max-width: 550px)": {
+                    width: "48vw",
+                  },
+                  "@media (max-width: 470px)": {
+                    width: "52vw",
+                  },
                 }}
                 variant="outlined"
                 margin="normal"
@@ -94,6 +127,24 @@ export default function LogingForm() {
               <FormControl
                 sx={{
                   width: "22vw",
+                  "@media (max-width: 1100px)": {
+                    width: "27vw",
+                  },
+                  "@media (max-width: 810px)": {
+                    width: "30vw",
+                  },
+                  "@media (max-width: 750px)": {
+                    width: "35vw",
+                  },
+                  "@media (max-width: 670px)": {
+                    width: "40vw",
+                  },
+                  "@media (max-width: 550px)": {
+                    width: "48vw",
+                  },
+                  "@media (max-width: 470px)": {
+                    width: "52vw",
+                  },
                 }}
                 variant="outlined"
               >
@@ -135,7 +186,26 @@ export default function LogingForm() {
                   "&:hover": {
                     backgroundColor: "#0C9E9E",
                   },
-                  margin: "0.3vw 0",
+                  margin: "2.5vw 0 0 0",
+                  "@media (max-width: 1100px)": {
+                    width: "27vw",
+                  },
+                  "@media (max-width: 810px)": {
+                    width: "30vw",
+                  },
+                  "@media (max-width: 750px)": {
+                    width: "35vw",
+                  },
+                  "@media (max-width: 670px)": {
+                    width: "40vw",
+                  },
+                  "@media (max-width: 550px)": {
+                    width: "48vw",
+                  },
+                  "@media (max-width: 470px)": {
+                    width: "52vw",
+                    fontSize: "0.9rem",
+                  },
                 }}
               >
                 {loginMutation.isPending ? "Logging in..." : "Login"}
@@ -170,6 +240,37 @@ const LogingFormContainer = styled.div`
   margin: auto;
   border: 0.15rem solid #008080;
   border-radius: 2rem;
+
+  @media (max-width: 1100px) {
+    width: 35vw;
+    height: 55vh;
+  }
+  @media (max-width: 900px) {
+    width: 38vw;
+    height: 50vh;
+  }
+
+  @media (max-width: 850px) {
+    width: 40vw;
+    height: 50vh;
+  }
+
+  @media (max-width: 750px) {
+    width: 45vw;
+    height: 50vh;
+  }
+  @media (max-width: 670px) {
+    width: 50vw;
+    height: 50vh;
+  }
+  @media (max-width: 550px) {
+    width: 60vw;
+    height: 50vh;
+  }
+  @media (max-width: 470px) {
+    width: 65vw;
+    height: 50vh;
+  }
 `;
 
 const logingTextStyles = {
