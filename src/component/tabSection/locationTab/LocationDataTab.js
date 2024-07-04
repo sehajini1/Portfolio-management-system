@@ -49,7 +49,16 @@ export default function LocationDataTab() {
     <LocationDataWrapper>
       {role === "admin" ? (
         <>
-          <Typography component="h1" variant="h5" sx={locationTextStyles}>
+          <Typography
+            component="h1"
+            variant="h5"
+            sx={{
+              ...locationTextStyles,
+              "@media (max-width: 500px)": {
+                fontSize: "1rem",
+              },
+            }}
+          >
             Add the location details
           </Typography>
           <Box
@@ -57,6 +66,12 @@ export default function LocationDataTab() {
               display: "flex",
               flexDirection: "row",
               gap: "2rem",
+              "@media (max-width: 1150px)": {
+                gap: "1.5rem",
+              },
+              "@media (max-width: 900px)": {
+                flexDirection: "column",
+              },
             }}
           >
             <Box
@@ -68,6 +83,12 @@ export default function LocationDataTab() {
               <TextField
                 sx={{
                   width: "22vw",
+                  "@media (max-width: 1150px)": {
+                    width: "23vw",
+                  },
+                  "@media (max-width: 900px)": {
+                    width: "100%",
+                  },
                 }}
                 variant="outlined"
                 margin="normal"
@@ -84,12 +105,34 @@ export default function LocationDataTab() {
                   },
                 }}
               />
-              <Typography sx={{ fontSize: "0.8rem", marginTop: "3vh" }}>
+              <Typography
+                sx={{
+                  fontSize: "0.9rem",
+                  marginTop: "3vh",
+                  "@media (max-width: 1000px)": {
+                    fontSize: "0.85rem",
+                    marginTop: "2vh",
+                  },
+                }}
+              >
                 Select your location using the map
               </Typography>
 
               <TextField
-                sx={{ width: "22vw", marginTop: "1rem" }}
+                sx={{
+                  width: "22vw",
+                  marginTop: "1rem",
+                  "@media (max-width: 1150px)": {
+                    width: "23vw",
+                  },
+                  "@media (max-width: 1000px)": {
+                    marginTop: "0.8rem",
+                  },
+
+                  "@media (max-width: 900px)": {
+                    width: "100%",
+                  },
+                }}
                 variant="outlined"
                 margin="normal"
                 required
@@ -99,15 +142,23 @@ export default function LocationDataTab() {
                 name="latitude"
                 autoComplete="latitude"
                 value={latitude}
-                FormHelperTextProps={{
-                  sx: {
-                    bottom: "-20px",
-                  },
-                }}
               />
 
               <TextField
-                sx={{ width: "22vw", marginTop: "1rem" }}
+                sx={{
+                  width: "22vw",
+                  marginTop: "1rem",
+                  "@media (max-width: 1150px)": {
+                    width: "23vw",
+                  },
+                  "@media (max-width: 1000px)": {
+                    marginTop: "0.8rem",
+                  },
+
+                  "@media (max-width: 900px)": {
+                    width: "100%",
+                  },
+                }}
                 variant="outlined"
                 margin="normal"
                 disabled
@@ -117,21 +168,34 @@ export default function LocationDataTab() {
                 name="longitude"
                 autoComplete="longitude"
                 value={longitude}
-                FormHelperTextProps={{
-                  sx: {
-                    bottom: "-20px",
-                  },
-                }}
               />
             </Box>
-            <Box sx={{ marginTop: "1rem", width: "100%" }}>
+            <Box
+              sx={{
+                marginTop: "1rem",
+                width: "100%",
+                "@media (max-width: 900px)": {
+                  marginTop: "0.5rem",
+                },
+              }}
+            >
               <AddMapComponent onLocationSelect={handleLocationSelect} />
             </Box>
           </Box>
           <Button
             type="submit"
             onClick={handleSubmit}
-            sx={AddButtonStyles}
+            sx={{
+              ...AddButtonStyles,
+              "@media (max-width: 1150px)": {
+                width: "23vw",
+              },
+              "@media (max-width: 900px)": {
+                width: "100%",
+                marginTop: "1.5rem",
+                marginBottom: "1rem",
+              },
+            }}
             disabled={addLocationMutation.isLoading}
           >
             {addLocationMutation.isLoading ? "Adding..." : "Add Location"}
