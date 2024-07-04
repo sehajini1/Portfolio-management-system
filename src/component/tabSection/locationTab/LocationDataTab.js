@@ -11,6 +11,8 @@ export default function LocationDataTab() {
   const [latitude, setLatitude] = useState("");
   const [longitude, setLongitude] = useState("");
 
+  const role = localStorage.getItem('role');
+
   const queryClient = useQueryClient();
 
   const addLocationMutation = useMutation({
@@ -45,6 +47,8 @@ export default function LocationDataTab() {
 
   return (
     <LocationDataWrapper>
+    {role === 'admin' ? (
+      <>
       <Typography component="h1" variant="h5" sx={locationTextStyles}>
         Add the location details
       </Typography>
@@ -155,6 +159,13 @@ export default function LocationDataTab() {
       >
         {addLocationMutation.isLoading ? "Adding..." : "Add Location"}
       </Button>
+      </>
+    ):(
+      <Typography  sx={{color:"red",fontSize:"1rem"}}>
+          You cannot access add a customer.
+        </Typography>
+      )}
+    
       {/* {addLocationMutation.isError && (
         <Typography color="error">
           An error occurred: {addLocationMutation.error.message}
