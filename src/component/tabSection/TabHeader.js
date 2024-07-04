@@ -7,8 +7,16 @@ import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 import CustomerTab from "./cutomerTab/CustomerTab";
 import LocationDataTab from "./locationTab/LocationDataTab";
-import LogoutIcon from '@mui/icons-material/Logout';
-import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Fab } from "@mui/material";
+import LogoutIcon from "@mui/icons-material/Logout";
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Fab,
+} from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 function CustomTabPanel(props) {
@@ -58,9 +66,9 @@ export default function FullWidthTabs() {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem('token');
+    localStorage.removeItem("token");
     setOpenLogoutDialog(false);
-    navigate('/');
+    navigate("/");
   };
 
   return (
@@ -78,18 +86,22 @@ export default function FullWidthTabs() {
         </Tabs>
       </AppBar>
       <CustomTabPanel value={value} index={0}>
-        <CustomerTab/>
+        <CustomerTab />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
-      <LocationDataTab/>
+        <LocationDataTab />
       </CustomTabPanel>
       <Fab
         color="primary"
         aria-label="logout"
         sx={{
-          position: 'absolute',
+          position: "absolute",
           bottom: theme.spacing(2),
           right: theme.spacing(2),
+          bgcolor: "#008080", 
+          "&:hover": {
+            bgcolor: "#0C9E9E", 
+          },
         }}
         onClick={handleLogoutClick}
       >
@@ -101,17 +113,23 @@ export default function FullWidthTabs() {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">
-          {"Confirm Logout"}
-        </DialogTitle>
+        <DialogTitle id="alert-dialog-title">{"Confirm Logout"}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
             Are you sure you want to log out?
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleCloseLogoutDialog}>Cancel</Button>
-          <Button onClick={handleLogout} autoFocus>
+          <Button
+          sx={{
+            color:"#008080"
+          }} 
+          onClick={handleCloseLogoutDialog}>Cancel</Button>
+          <Button 
+          sx={{
+            color:"#008080"
+          }}
+          onClick={handleLogout} autoFocus>
             Logout
           </Button>
         </DialogActions>

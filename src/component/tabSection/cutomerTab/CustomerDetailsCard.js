@@ -101,12 +101,20 @@ export default function CustomerDetailsCard({ _id,customerName, latitude,longitu
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            Are you sure you want to delete?
+          Are you sure you want to delete it?
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleCloseLogoutDialog}>Cancel</Button>
-          <Button onClick={handleDelete} autoFocus>
+          <Button 
+          sx={{
+            color:"#008080"
+          }} 
+          onClick={handleCloseLogoutDialog}>Cancel</Button>
+          <Button 
+          sx={{
+            color:"#008080"
+          }} 
+          onClick={handleDelete} autoFocus>
             Delete
           </Button>
         </DialogActions>
