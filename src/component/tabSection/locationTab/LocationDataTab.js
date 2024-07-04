@@ -69,7 +69,7 @@ export default function LocationDataTab() {
               "@media (max-width: 1150px)": {
                 gap: "1.5rem",
               },
-              "@media (max-width: 900px)": {
+              "@media (max-width: 800px)": {
                 flexDirection: "column",
               },
             }}
@@ -86,7 +86,7 @@ export default function LocationDataTab() {
                   "@media (max-width: 1150px)": {
                     width: "23vw",
                   },
-                  "@media (max-width: 900px)": {
+                  "@media (max-width: 800px)": {
                     width: "100%",
                   },
                 }}
@@ -129,7 +129,7 @@ export default function LocationDataTab() {
                     marginTop: "0.8rem",
                   },
 
-                  "@media (max-width: 900px)": {
+                  "@media (max-width: 800px)": {
                     width: "100%",
                   },
                 }}
@@ -155,7 +155,7 @@ export default function LocationDataTab() {
                     marginTop: "0.8rem",
                   },
 
-                  "@media (max-width: 900px)": {
+                  "@media (max-width: 800px)": {
                     width: "100%",
                   },
                 }}
@@ -174,7 +174,7 @@ export default function LocationDataTab() {
               sx={{
                 marginTop: "1rem",
                 width: "100%",
-                "@media (max-width: 900px)": {
+                "@media (max-width: 800px)": {
                   marginTop: "0.5rem",
                 },
               }}
@@ -190,7 +190,10 @@ export default function LocationDataTab() {
               "@media (max-width: 1150px)": {
                 width: "23vw",
               },
-              "@media (max-width: 900px)": {
+              "@media (max-width: 850px)": {
+                fontSize: "0.7rem",
+              },
+              "@media (max-width: 800px)": {
                 width: "100%",
                 marginTop: "1.5rem",
                 marginBottom: "1rem",

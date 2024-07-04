@@ -30,7 +30,7 @@ export default function CustomerTab() {
   );
 
   const containerHeight =
-    filteredCustomers.length > MAX_CARDS_WITHOUT_SCROLL ? "75vh" : "auto";
+    filteredCustomers.length > MAX_CARDS_WITHOUT_SCROLL ? "78vh" : "auto";
 
   return (
     <CustomerDataWrapper>
@@ -40,10 +40,32 @@ export default function CustomerTab() {
             display: "flex",
             flexDirection: "row",
             gap: "2rem",
-            width: "100%",
-            height: containerHeight,
+            // width: "100%",
+            //height: containerHeight,
+            // "@media (max-width: 900px)": {
+            //     gap:"1rem"
+            //   },
+            "@media (max-width: 800px)": {
+              flexDirection: "column",
+              alignItems: "center",
+            },
           }}
         >
+          <Box
+            sx={{
+              width: "52vw",
+              height: containerHeight,
+              "@media (max-width: 900px)": {
+                width: "50vw",
+              },
+              "@media (max-width: 800px)": {
+                width: "100%",
+                height: "50vh",
+              },
+            }}
+          >
+            <MapBox customers={filteredCustomers} />
+          </Box>
           <Box
             sx={{
               display: "flex",
@@ -55,7 +77,12 @@ export default function CustomerTab() {
                 customerData.length > MAX_CARDS_WITHOUT_SCROLL
                   ? "auto"
                   : "visible",
-              padding: "0.5rem",
+              padding: "0.5rem 0.5rem 0.5rem 0",
+              "@media (max-width: 800px)": {
+                width: "100%",
+                maxWidth: "800px", // Adjust this value as needed
+                alignItems: "center",
+              },
             }}
           >
             <Box
@@ -65,6 +92,7 @@ export default function CustomerTab() {
                 zIndex: 1,
                 backgroundColor: "background.paper",
                 padding: "0.1rem",
+                width: "100%",
               }}
             >
               <ReactSearchBox
@@ -79,15 +107,32 @@ export default function CustomerTab() {
                 fuseConfigs={{
                   threshold: 0.05,
                 }}
-                inputFontSize="14px"
-                inputHeight="40px"
+                inputFontSize="0.87rem"
+                inputHeight="2.5rem"
               />
             </Box>
+            <Box
+            sx={{
+              display: "flex",
+              flexWrap: "wrap",
+              gap: "1rem",
+              justifyContent: "space-between",
+              width: "100%",
+              "@media (max-width: 800px)": {
+                flexDirection: "column",
+                alignItems: "center",
+              },
+            }}
+          >
             {filteredCustomers.map((customer, index) => (
               <CustomerDetailsCard
                 sx={{
-                  padding: "1rem",
+                  flexBasis: "calc(50% - 0.5rem)", // 2 cards per row
+                  flexGrow: 0,
                   flexShrink: 0,
+                  "@media (max-width: 800px)": {
+                    flexBasis: "100%",
+                  },
                 }}
                 key={customer._id || index}
                 _id={customer._id}
@@ -96,9 +141,7 @@ export default function CustomerTab() {
                 longitude={customer.longitude}
               />
             ))}
-          </Box>
-          <Box sx={{ width: "70%", height: containerHeight }}>
-            <MapBox customers={filteredCustomers} />
+            </Box>
           </Box>
         </Box>
       ) : (

@@ -102,7 +102,7 @@ export default function CustomerDetailsMap({ customers }) {
 }
 
 const MapWrapper = styled.div`
-  position: absolute;
-  height: 500px;
-  width: 38%;
+  position: relative;
+  height: 100%;
+  width: 100%;
 `;
