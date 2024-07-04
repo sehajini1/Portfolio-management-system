@@ -44,11 +44,11 @@ export default function UpdateCustomerModal({
         longitude: longitude,
       };
       await updateMember(customer._id, updatedData);
-      console.log("kaka");
+      
       if (typeof onUpdate === 'function') {
         onUpdate();
       }
-      console.log("lalal");
+    
       handleClose();
     } catch (error) {
       console.error("Error updating customer:", error);

@@ -12,10 +12,11 @@ export default function LandingPage() {
   );
 }
 
-const LandingPageWrapper = styled.div``;
+const LandingPageWrapper = styled.div`
+`;
 
 const TabSection = styled.div`
     width: 60vw;
     margin: auto;
-    padding-top: 10vh;
+    padding-top: 5vh;
 `;
