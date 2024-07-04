@@ -40,11 +40,6 @@ export default function CustomerTab() {
             display: "flex",
             flexDirection: "row",
             gap: "2rem",
-            // width: "100%",
-            //height: containerHeight,
-            // "@media (max-width: 900px)": {
-            //     gap:"1rem"
-            //   },
             "@media (max-width: 800px)": {
               flexDirection: "column",
               alignItems: "center",
@@ -108,38 +103,37 @@ export default function CustomerTab() {
                 }}
                 inputFontSize="0.87rem"
                 inputHeight="2.5rem"
-                
               />
             </Box>
             <Box
-            sx={{
-              display: "flex",
-              flexWrap: "wrap",
-              gap: "1rem",
-              justifyContent: "space-between",
-              width: "100%",
-              "@media (max-width: 800px)": {
-                flexDirection: "column",
-                alignItems: "center",
-              },
-            }}
-          >
-            {filteredCustomers.map((customer, index) => (
-              <CustomerDetailsCard
-                sx={{
-                  flexGrow: 0,
-                  flexShrink: 0,
-                  "@media (max-width: 800px)": {
-                width:"100%"
-              },
-                }}
-                key={customer._id || index}
-                _id={customer._id}
-                customerName={customer.customerName}
-                latitude={customer.latitude}
-                longitude={customer.longitude}
-              />
-            ))}
+              sx={{
+                display: "flex",
+                flexWrap: "wrap",
+                gap: "1rem",
+                justifyContent: "space-between",
+                width: "100%",
+                "@media (max-width: 800px)": {
+                  flexDirection: "column",
+                  alignItems: "center",
+                },
+              }}
+            >
+              {filteredCustomers.map((customer, index) => (
+                <CustomerDetailsCard
+                  sx={{
+                    flexGrow: 0,
+                    flexShrink: 0,
+                    "@media (max-width: 800px)": {
+                      width: "100%",
+                    },
+                  }}
+                  key={customer._id || index}
+                  _id={customer._id}
+                  customerName={customer.customerName}
+                  latitude={customer.latitude}
+                  longitude={customer.longitude}
+                />
+              ))}
             </Box>
           </Box>
         </Box>
