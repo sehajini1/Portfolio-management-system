@@ -30,7 +30,7 @@ export default function CustomerTab() {
   );
 
   const containerHeight =
-    filteredCustomers.length > MAX_CARDS_WITHOUT_SCROLL ? "75vh" : "auto";
+    filteredCustomers.length > MAX_CARDS_WITHOUT_SCROLL ? "78vh" : "auto";
 
   return (
     <CustomerDataWrapper>
@@ -40,8 +40,8 @@ export default function CustomerTab() {
             display: "flex",
             flexDirection: "row",
             gap: "2rem",
-            width: "100%",
-            height: containerHeight,
+            // width: "100%",
+            //height: containerHeight,
           }}
         >
           <Box
@@ -55,7 +55,7 @@ export default function CustomerTab() {
                 customerData.length > MAX_CARDS_WITHOUT_SCROLL
                   ? "auto"
                   : "visible",
-              padding: "0.5rem",
+              padding: "0.5rem 0.5rem 0.5rem 0",
             }}
           >
             <Box
@@ -79,8 +79,8 @@ export default function CustomerTab() {
                 fuseConfigs={{
                   threshold: 0.05,
                 }}
-                inputFontSize="14px"
-                inputHeight="40px"
+                inputFontSize="0.87rem"
+                inputHeight="2.5rem"
               />
             </Box>
             {filteredCustomers.map((customer, index) => (
@@ -97,7 +97,7 @@ export default function CustomerTab() {
               />
             ))}
           </Box>
-          <Box sx={{ width: "70%", height: containerHeight }}>
+          <Box sx={{  height: containerHeight }}>
             <MapBox customers={filteredCustomers} />
           </Box>
         </Box>
