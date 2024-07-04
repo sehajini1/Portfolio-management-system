@@ -42,8 +42,26 @@ export default function CustomerTab() {
             gap: "2rem",
             // width: "100%",
             //height: containerHeight,
+            // "@media (max-width: 900px)": {
+            //     gap:"1rem"
+            //   },
+            "@media (max-width: 800px)": {
+                flexDirection: "column",
+                alignItems: "center",
+              },
           }}
         >
+        <Box sx={{ width:"52vw", height: containerHeight,
+          "@media (max-width: 900px)": {
+            width:"50vw"
+              }, 
+              "@media (max-width: 800px)": {
+              width: "100%", 
+              height: "50vh", 
+            }
+              }}>
+            <MapBox customers={filteredCustomers} />
+          </Box>
           <Box
             sx={{
               display: "flex",
@@ -56,6 +74,11 @@ export default function CustomerTab() {
                   ? "auto"
                   : "visible",
               padding: "0.5rem 0.5rem 0.5rem 0",
+              "@media (max-width: 800px)": {
+                    width: "100%",
+                  },
+
+              
             }}
           >
             <Box
@@ -97,9 +120,7 @@ export default function CustomerTab() {
               />
             ))}
           </Box>
-          <Box sx={{  height: containerHeight }}>
-            <MapBox customers={filteredCustomers} />
-          </Box>
+          
         </Box>
       ) : (
         <Typography>No customer data available</Typography>
