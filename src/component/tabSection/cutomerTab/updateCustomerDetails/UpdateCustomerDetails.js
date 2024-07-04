@@ -20,7 +20,6 @@ export default function UpdateCustomerModal({
   const [name, setName] = useState("");
   const [latitude, setLatitude] = useState("");
   const [longitude, setLongitude] = useState("");
-  const [error, setError] = useState("");
 
   useEffect(() => {
     if (customer) {
@@ -36,7 +35,6 @@ export default function UpdateCustomerModal({
   };
 
   const handleUpdate = async () => {
-    setError("");
     try {
       const updatedData = {
         customerName: name,
@@ -44,15 +42,14 @@ export default function UpdateCustomerModal({
         longitude: longitude,
       };
       await updateMember(customer._id, updatedData);
-      console.log("kaka");
-      if (typeof onUpdate === 'function') {
+
+      if (typeof onUpdate === "function") {
         onUpdate();
       }
-      console.log("lalal");
+
       handleClose();
     } catch (error) {
       console.error("Error updating customer:", error);
-      setError("Failed to update customer.Please try again");
     }
   };
   console.log(customer);

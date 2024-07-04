@@ -1,4 +1,4 @@
-import { Box,  Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import React, { useState } from "react";
 import styled from "styled-components";
 import CustomerDetailsCard from "./CustomerDetailsCard";
@@ -30,7 +30,7 @@ export default function CustomerTab() {
   );
 
   const containerHeight =
-  filteredCustomers.length > MAX_CARDS_WITHOUT_SCROLL ? "75vh" : "auto";
+    filteredCustomers.length > MAX_CARDS_WITHOUT_SCROLL ? "75vh" : "auto";
 
   return (
     <CustomerDataWrapper>
@@ -59,32 +59,31 @@ export default function CustomerTab() {
             }}
           >
             <Box
-            sx={{
-              position: "sticky",
-              top: 0,
-              zIndex: 1,
-              backgroundColor: "background.paper",
-              padding: "0.1rem",
-            }}
-          >
-            <ReactSearchBox
-              placeholder="Search customer"
-              value={searchTerm}
-              data={customerData.map((customer) => ({
-                key: customer._id,
-                value: customer.customerName,
-              }))}
-              onChange={(value) => setSearchTerm(value)}
-              onSelect={(record) => setSearchTerm(record.item.value)}
-              fuseConfigs={{
-                threshold: 0.05,
+              sx={{
+                position: "sticky",
+                top: 0,
+                zIndex: 1,
+                backgroundColor: "background.paper",
+                padding: "0.1rem",
               }}
-              inputFontSize="14px"
-              inputHeight="40px"
-            />
-          </Box>
-            {filteredCustomers.map((customer,index) => (
-              
+            >
+              <ReactSearchBox
+                placeholder="Search customer"
+                value={searchTerm}
+                data={customerData.map((customer) => ({
+                  key: customer._id,
+                  value: customer.customerName,
+                }))}
+                onChange={(value) => setSearchTerm(value)}
+                onSelect={(record) => setSearchTerm(record.item.value)}
+                fuseConfigs={{
+                  threshold: 0.05,
+                }}
+                inputFontSize="14px"
+                inputHeight="40px"
+              />
+            </Box>
+            {filteredCustomers.map((customer, index) => (
               <CustomerDetailsCard
                 sx={{
                   padding: "1rem",
@@ -96,9 +95,7 @@ export default function CustomerTab() {
                 latitude={customer.latitude}
                 longitude={customer.longitude}
               />
-            
             ))}
-            
           </Box>
           <Box sx={{ width: "70%", height: containerHeight }}>
             <MapBox customers={filteredCustomers} />
@@ -111,6 +108,4 @@ export default function CustomerTab() {
   );
 }
 
-const CustomerDataWrapper = styled.div`
-  /* height:"50%" */
-`;
+const CustomerDataWrapper = styled.div``;

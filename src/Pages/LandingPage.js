@@ -15,7 +15,7 @@ export default function LandingPage() {
 const LandingPageWrapper = styled.div``;
 
 const TabSection = styled.div`
-    width: 60vw;
-    margin: auto;
-    padding-top: 10vh;
+  width: 60vw;
+  margin: auto;
+  padding-top: 5vh;
 `;

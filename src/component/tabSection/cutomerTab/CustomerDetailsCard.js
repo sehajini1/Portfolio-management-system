@@ -28,6 +28,9 @@ export default function CustomerDetailsCard({
   const [open, setOpen] = useState(false);
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
 
+  const role = localStorage.getItem("role");
+  console.log(role);
+
   const queryClient = useQueryClient();
 
   const deleteMutation = useMutation({
@@ -68,12 +71,6 @@ export default function CustomerDetailsCard({
   return (
     <CustomerCardWrapper>
       <Card sx={{ maxWidth: "20vw", bgcolor: "#e6ffff" }}>
-        {/* <CardMedia
-            component="img"
-            alt="green iguana"
-            height="140"
-            image={CustomerMap}
-          /> */}
         <CardContent>
           <Typography gutterBottom component="div" sx={CustomerNameStyle}>
             {customerName}
@@ -88,21 +85,22 @@ export default function CustomerDetailsCard({
             Longitude: {longitude}
           </Typography>
         </CardContent>
-        <CardActions sx={ButtonStyles}>
-          <IconButton aria-label="delete" onClick={handleDeleteClick}>
-            <DeleteIcon sx={DeleteButtonStyle} />
-          </IconButton>
-          <Button sx={UpdateButtonStyles} size="small" onClick={handleOpen}>
-            Update
-          </Button>
-        </CardActions>
+        {role === "admin" && (
+          <CardActions sx={ButtonStyles}>
+            <IconButton aria-label="delete" onClick={handleDeleteClick}>
+              <DeleteIcon sx={DeleteButtonStyle} />
+            </IconButton>
+            <Button sx={UpdateButtonStyles} size="small" onClick={handleOpen}>
+              Update
+            </Button>
+          </CardActions>
+        )}
       </Card>
       <UpdateCustomerModal
         open={open}
         handleClose={handleClose}
         customer={{ _id, customerName, latitude, longitude }}
         onUpdate={handleCustomerUpdate}
-        
       />
       <Dialog
         open={openDeleteDialog}
@@ -127,6 +125,7 @@ export default function CustomerDetailsCard({
           >
             Cancel
           </Button>
+
           <Button
             sx={{
               color: "#008080",

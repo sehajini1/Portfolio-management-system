@@ -98,9 +98,9 @@ export default function FullWidthTabs() {
           position: "absolute",
           bottom: theme.spacing(2),
           right: theme.spacing(2),
-          bgcolor: "#008080", 
+          bgcolor: "#008080",
           "&:hover": {
-            bgcolor: "#0C9E9E", 
+            bgcolor: "#0C9E9E",
           },
         }}
         onClick={handleLogoutClick}
@@ -121,15 +121,20 @@ export default function FullWidthTabs() {
         </DialogContent>
         <DialogActions>
           <Button
-          sx={{
-            color:"#008080"
-          }} 
-          onClick={handleCloseLogoutDialog}>Cancel</Button>
-          <Button 
-          sx={{
-            color:"#008080"
-          }}
-          onClick={handleLogout} autoFocus>
+            sx={{
+              color: "#008080",
+            }}
+            onClick={handleCloseLogoutDialog}
+          >
+            Cancel
+          </Button>
+          <Button
+            sx={{
+              color: "#008080",
+            }}
+            onClick={handleLogout}
+            autoFocus
+          >
             Logout
           </Button>
         </DialogActions>

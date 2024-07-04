@@ -4,12 +4,14 @@ import styled from "styled-components";
 import AddMapComponent from "./AddLocationDataMap";
 import { addLocation } from "../../../API";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 
 export default function LocationDataTab() {
   const [customerName, setCustomerName] = useState("");
   const [latitude, setLatitude] = useState("");
   const [longitude, setLongitude] = useState("");
+
+  const role = localStorage.getItem("role");
 
   const queryClient = useQueryClient();
 
@@ -22,11 +24,11 @@ export default function LocationDataTab() {
       setCustomerName("");
       setLatitude("");
       setLongitude("");
-      toast.success('Location added successfully!');
+      toast.success("Location added successfully!");
     },
-    onError:(error)=>{
+    onError: (error) => {
       toast.error(`An error occurred: ${error.message}`);
-    }
+    },
   });
 
   const handleLocationSelect = (lat, lng) => {
@@ -45,124 +47,101 @@ export default function LocationDataTab() {
 
   return (
     <LocationDataWrapper>
-      <Typography component="h1" variant="h5" sx={locationTextStyles}>
-        Add the location details
-      </Typography>
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "row",
-          gap: "2rem",
-        }}
-      >
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-          }}
-        >
-          <TextField
-            sx={{
-              width: "22vw",
-            }}
-            variant="outlined"
-            margin="normal"
-            required
-            id="customername"
-            label="Customer name"
-            name="customername"
-            autoComplete="customername"
-            // placeholder="Enter your user name"
-            value={customerName}
-            onChange={(e) => setCustomerName(e.target.value)}
-            //error={emailError}
-            //helperText={
-            //  emailError && "Ingrese un correo electrónico válido"
-            //}
-            //onChange={handleEmailChange}
-            FormHelperTextProps={{
-              sx: {
-                bottom: "-20px",
-              },
-            }}
-            // InputProps={{
-            //   style: {
-            //     color: "#174022",
-            //   },
-            // }}
-          />
-          <Typography sx={{ fontSize: "0.8rem", marginTop: "3vh" }}>
-            Select your location using the map
+      {role === "admin" ? (
+        <>
+          <Typography component="h1" variant="h5" sx={locationTextStyles}>
+            Add the location details
           </Typography>
-
-          <TextField
-            sx={{ width: "22vw", marginTop: "1rem" }}
-            variant="outlined"
-            margin="normal"
-            required
-            disabled
-            id="latitude"
-            label="Latitude"
-            name="latitude"
-            autoComplete="latitude"
-            value={latitude}
-            onChange={(e) => setLatitude(e.target.value)}
-            FormHelperTextProps={{
-              sx: {
-                bottom: "-20px",
-              },
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              gap: "2rem",
             }}
-            // InputProps={{
-            //   style: {
-            //     color: "#174022",
-            //   },
-            // }}
-          />
+          >
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+              }}
+            >
+              <TextField
+                sx={{
+                  width: "22vw",
+                }}
+                variant="outlined"
+                margin="normal"
+                required
+                id="customername"
+                label="Customer name"
+                name="customername"
+                autoComplete="customername"
+                value={customerName}
+                onChange={(e) => setCustomerName(e.target.value)}
+                FormHelperTextProps={{
+                  sx: {
+                    bottom: "-20px",
+                  },
+                }}
+              />
+              <Typography sx={{ fontSize: "0.8rem", marginTop: "3vh" }}>
+                Select your location using the map
+              </Typography>
 
-          <TextField
-            sx={{ width: "22vw", marginTop: "1rem" }}
-            variant="outlined"
-            margin="normal"
-            disabled
-            required
-            id="longitude"
-            label="Longitude"
-            name="longitude"
-            autoComplete="longitude"
-            value={longitude}
-            onChange={(e) => setLongitude(e.target.value)}
-            FormHelperTextProps={{
-              sx: {
-                bottom: "-20px",
-              },
-            }}
-            // InputProps={{
-            //   style: {
-            //     color: "#174022",
-            //   },
-            // }}
-          />
-        </Box>
-        <Box sx={{ marginTop: "1rem", width: "100%" }}>
-          <AddMapComponent onLocationSelect={handleLocationSelect} />
-        </Box>
-      </Box>
-      <Button
-        type="submit"
-        onClick={handleSubmit}
-        sx={AddButtonStyles}
-        disabled={addLocationMutation.isLoading}
-      >
-        {addLocationMutation.isLoading ? "Adding..." : "Add Location"}
-      </Button>
-      {/* {addLocationMutation.isError && (
-        <Typography color="error">
-          An error occurred: {addLocationMutation.error.message}
+              <TextField
+                sx={{ width: "22vw", marginTop: "1rem" }}
+                variant="outlined"
+                margin="normal"
+                required
+                disabled
+                id="latitude"
+                label="Latitude"
+                name="latitude"
+                autoComplete="latitude"
+                value={latitude}
+                FormHelperTextProps={{
+                  sx: {
+                    bottom: "-20px",
+                  },
+                }}
+              />
+
+              <TextField
+                sx={{ width: "22vw", marginTop: "1rem" }}
+                variant="outlined"
+                margin="normal"
+                disabled
+                required
+                id="longitude"
+                label="Longitude"
+                name="longitude"
+                autoComplete="longitude"
+                value={longitude}
+                FormHelperTextProps={{
+                  sx: {
+                    bottom: "-20px",
+                  },
+                }}
+              />
+            </Box>
+            <Box sx={{ marginTop: "1rem", width: "100%" }}>
+              <AddMapComponent onLocationSelect={handleLocationSelect} />
+            </Box>
+          </Box>
+          <Button
+            type="submit"
+            onClick={handleSubmit}
+            sx={AddButtonStyles}
+            disabled={addLocationMutation.isLoading}
+          >
+            {addLocationMutation.isLoading ? "Adding..." : "Add Location"}
+          </Button>
+        </>
+      ) : (
+        <Typography sx={{ color: "red", fontSize: "1rem" }}>
+          You cannot access add a customer.
         </Typography>
       )}
-      {addLocationMutation.isSuccess && (
-        <Typography color="success">Location added successfully!</Typography>
-      )} */}
     </LocationDataWrapper>
   );
 }
