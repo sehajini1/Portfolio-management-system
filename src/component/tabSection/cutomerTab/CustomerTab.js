@@ -112,5 +112,5 @@ export default function CustomerTab() {
 }
 
 const CustomerDataWrapper = styled.div`
-  /* height:"100vh" */
+  /* height:"50%" */
 `;
