@@ -70,8 +70,9 @@ export default function CustomerDetailsCard({
 
   return (
     <CustomerCardWrapper>
-      <Card sx={{ maxWidth: "20vw",
-       bgcolor: "#e6ffff",}}>
+      <Card sx={{ width: "100%",
+       bgcolor: "#e6ffff",
+}}>
         <CardContent>
           <Typography gutterBottom component="div" sx={CustomerNameStyle}>
             {customerName}
