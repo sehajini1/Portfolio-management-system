@@ -6,13 +6,13 @@ import { environment } from '../../../enviroments/EnvDev';
 
 mapboxgl.accessToken = environment.mapbox.accessToken;
 
-export default function AddMapComponent({ onLocationSelect }) {
+export default function AddMapComponent({ onLocationSelect,initialLat,initialLng }) {
   const [viewState, setViewState] = useState({
-    longitude: 80.6337,
-    latitude: 7.8731,
+    longitude: initialLng|| 80.6337,
+    latitude: initialLat || 7.8731,
     zoom: 3
   });
-  const [marker, setMarker] = useState(null);
+  const [marker, setMarker] = useState(initialLat && initialLng ? { lng: initialLng, lat: initialLat } : null);
 
   const handleClick = useCallback((event) => {
     const { lngLat } = event;

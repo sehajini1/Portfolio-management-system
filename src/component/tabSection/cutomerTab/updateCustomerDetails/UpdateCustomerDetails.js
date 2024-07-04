@@ -9,18 +9,20 @@ import {
   TextField,
 } from "@mui/material";
 import { updateMember } from "../../../../API";
-import Map, { Marker } from "react-map-gl";
+import AddLocationDataMap from "../../locationTab/AddLocationDataMap";
 
-//const MAPBOX_TOKEN = 'your_mapbox_token'; // Replace with your Mapbox token
-
-export default function UpdateCustomerModal({open,handleClose,customer,onUpdate,}) {
+export default function UpdateCustomerModal({
+  open,
+  handleClose,
+  customer,
+  onUpdate,
+}) {
   const [name, setName] = useState("");
   const [latitude, setLatitude] = useState("");
   const [longitude, setLongitude] = useState("");
   const [error, setError] = useState("");
-  console.log("jj", open,handleClose);
+
   useEffect(() => {
-    console.log("Customer prop changed:", customer);
     if (customer) {
       setName(customer.customerName || "");
       setLatitude(customer.latitude || "");
@@ -28,10 +30,9 @@ export default function UpdateCustomerModal({open,handleClose,customer,onUpdate,
     }
   }, [customer]);
 
-  const handleMapClick = (event) => {
-    const [lng, lat] = event.lngLat;
-    setLatitude(lat);
-    setLongitude(lng);
+  const handleLocationSelect = (lat, lng) => {
+    setLatitude(lat.toFixed(6));
+    setLongitude(lng.toFixed(6));
   };
 
   const handleUpdate = async () => {
@@ -43,9 +44,11 @@ export default function UpdateCustomerModal({open,handleClose,customer,onUpdate,
         longitude: longitude,
       };
       await updateMember(customer._id, updatedData);
-      console.log("kaka")
-      //onUpdate(); // Callback to refetch data in parent component
-      console.log("lalal")
+      console.log("kaka");
+      if (typeof onUpdate === 'function') {
+        onUpdate();
+      }
+      console.log("lalal");
       handleClose();
     } catch (error) {
       console.error("Error updating customer:", error);
@@ -72,6 +75,7 @@ export default function UpdateCustomerModal({open,handleClose,customer,onUpdate,
           label="Latitude"
           type="text"
           fullWidth
+          disabled
           value={latitude}
           onChange={(e) => setLatitude(e.target.value)}
         />
@@ -80,6 +84,7 @@ export default function UpdateCustomerModal({open,handleClose,customer,onUpdate,
           label="Longitude"
           type="text"
           fullWidth
+          disabled
           value={longitude}
           onChange={(e) => setLongitude(e.target.value)}
         />
@@ -90,7 +95,13 @@ export default function UpdateCustomerModal({open,handleClose,customer,onUpdate,
             border: "0.1rem solid #b3b3b3",
             borderRadius: "0.3rem",
           }}
-        ></Box>
+        >
+          <AddLocationDataMap
+            onLocationSelect={handleLocationSelect}
+            initialLat={parseFloat(customer?.latitude)}
+            initialLng={parseFloat(customer?.longitude)}
+          />
+        </Box>
       </DialogContent>
       <DialogActions sx={UpdateButtonWrapper}>
         <Button sx={UpdateButtonStyles} onClick={handleClose}>
