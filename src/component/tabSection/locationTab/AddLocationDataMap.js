@@ -33,7 +33,7 @@ export default function AddMapComponent({
     <Map
       {...viewState}
       onMove={(evt) => setViewState(evt.viewState)}
-      style={{ width: "100%", height: 400 }}
+      style={{ width: "100%", height: 350 }}
       mapStyle="mapbox://styles/mapbox/streets-v11"
       mapboxAccessToken={mapboxgl.accessToken}
       onClick={handleClick}
