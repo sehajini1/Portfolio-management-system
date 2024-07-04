@@ -6,7 +6,7 @@ import styled from "styled-components";
 
 mapboxgl.accessToken = environment.mapbox.accessToken;
 
-export default function CustomerDetailsMap({customers}) {
+export default function CustomerDetailsMap({ customers }) {
   const mapContainerRef = useRef(null);
   const map = useRef(null);
 
@@ -31,79 +31,78 @@ export default function CustomerDetailsMap({customers}) {
       // Nifty code to force map to fit inside container when it loads
       map.current.resize();
 
-      map.current.addSource('customers', {
-        type: 'geojson',
+      map.current.addSource("customers", {
+        type: "geojson",
         data: {
-          type: 'FeatureCollection',
-          features: customers.map(customer => ({
-            type: 'Feature',
+          type: "FeatureCollection",
+          features: customers.map((customer) => ({
+            type: "Feature",
             geometry: {
-              type: 'Point',
-              coordinates: [customer.longitude, customer.latitude]
+              type: "Point",
+              coordinates: [customer.longitude, customer.latitude],
             },
             properties: {
               id: customer.id,
-              name: customer.customerName
-            }}))}
+              name: customer.customerName,
+            },
+          })),
+        },
       });
-      
+
       map.current.addLayer({
-        'id': 'customers-layer',
-        'type': 'circle',
-        'source': 'customers',
-        'paint': {
-          'circle-radius': 4,
-          'circle-stroke-width': 2,
-          'circle-color': 'red',
-          'circle-stroke-color': 'white'
-        }
+        id: "customers-layer",
+        type: "circle",
+        source: "customers",
+        paint: {
+          "circle-radius": 4,
+          "circle-stroke-width": 2,
+          "circle-color": "red",
+          "circle-stroke-color": "white",
+        },
       });
 
-        // Create a popup, but don't add it to the map yet.
-  const popup = new mapboxgl.Popup({
-    closeButton: false,
-    closeOnClick: false
-});
+      // Create a popup, but don't add it to the map yet.
+      const popup = new mapboxgl.Popup({
+        closeButton: false,
+        closeOnClick: false,
+      });
 
+      map.current.on("mouseenter", "customers-layer", (e) => {
+        map.current.getCanvas().style.cursor = "pointer";
 
-map.current.on('mouseenter', 'customers-layer', (e) => {
-    map.current.getCanvas().style.cursor = 'pointer';
-     
-    // Copy coordinates array.
-    const coordinates = e.features[0].geometry.coordinates.slice();
-    const properties = e.features[0].properties;
+        // Copy coordinates array.
+        const coordinates = e.features[0].geometry.coordinates.slice();
+        const properties = e.features[0].properties;
 
-    // build our popup html with our geoJSON properties
-    const popupHtml = `<strong>${properties.name}</strong>`
-     
-    // Ensure that if the map is zoomed out such that multiple
-    // copies of the feature are visible, the popup appears
-    // over the copy being pointed to.
-   while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-         coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-     }
-     
-    // Populate the popup and set its coordinates
-    // based on the feature found.
-    popup.setLngLat(coordinates).setHTML(popupHtml).addTo(map.current);
-});
-// Whe the cursor moves off the layer we remove the cursor
-map.current.on('mouseleave', 'customers-layer', () => {
-    map.current.getCanvas().style.cursor = '';
-    popup.remove();
-});
+        // build our popup html with our geoJSON properties
+        const popupHtml = `<strong>${properties.name}</strong>`;
+
+        // Ensure that if the map is zoomed out such that multiple
+        // copies of the feature are visible, the popup appears
+        // over the copy being pointed to.
+        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+          coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+        }
+
+        // Populate the popup and set its coordinates
+        // based on the feature found.
+        popup.setLngLat(coordinates).setHTML(popupHtml).addTo(map.current);
+      });
+      // Whe the cursor moves off the layer we remove the cursor
+      map.current.on("mouseleave", "customers-layer", () => {
+        map.current.getCanvas().style.cursor = "";
+        popup.remove();
+      });
     });
 
     // Clean up on unmount
     return () => map.current.remove();
-  }, [lat, lng, zoom,customers]);
-  return (
-    <MapWrapper ref={mapContainerRef} /> 
-  );
+  }, [lat, lng, zoom, customers]);
+  return <MapWrapper ref={mapContainerRef} />;
 }
 
 const MapWrapper = styled.div`
-    position: absolute;
-    height:500px;
-    width:38%;
+  position: absolute;
+  height: 500px;
+  width: 38%;
 `;

@@ -71,12 +71,6 @@ export default function CustomerDetailsCard({
   return (
     <CustomerCardWrapper>
       <Card sx={{ maxWidth: "20vw", bgcolor: "#e6ffff" }}>
-        {/* <CardMedia
-            component="img"
-            alt="green iguana"
-            height="140"
-            image={CustomerMap}
-          /> */}
         <CardContent>
           <Typography gutterBottom component="div" sx={CustomerNameStyle}>
             {customerName}

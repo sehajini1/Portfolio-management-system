@@ -32,7 +32,6 @@ export default function LogingForm() {
       const decodedToken = jwtDecode(data.token);
       const userRole = decodedToken.role;
       localStorage.setItem("role", userRole);
-      console.log(userRole);
       navigate("/details");
     },
     onError: (error) => {
@@ -54,8 +53,6 @@ export default function LogingForm() {
   };
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
-
-  
 
   return (
     <LogingWrapper>
