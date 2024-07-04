@@ -70,7 +70,7 @@ export default function CustomerDetailsCard({
 
   return (
     <CustomerCardWrapper>
-      <Card sx={{ width: "100%",
+      <Card sx={{ width: "20vw",
        bgcolor: "#e6ffff",
 }}>
         <CardContent>
