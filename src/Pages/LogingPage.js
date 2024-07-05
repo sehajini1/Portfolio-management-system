@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import LogingForm from "../component/logingSection/LogingForm";
-import backgroundImage from "../component/logingSection/image4.jpg"
+import backgroundImage from "../images/image.jpg"
 
 export default function LogingPage() {
   return (
