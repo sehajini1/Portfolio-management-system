@@ -56,6 +56,27 @@ export default function LogingForm() {
 
   return (
     <LogingWrapper>
+    <Typography
+    sx={{
+      margin:"5vw 0 0 0",
+      fontSize:"3rem",
+      color:"#EBF5F5",
+      fontWeight:"700",
+      textAlign:"center",
+      alignItems:"center",
+      justifyContent:"center",
+      "@media (max-width: 700px)": {
+                fontSize: "2.5rem",
+                margin:"7vw 0 0 0"
+              },
+              "@media (max-width: 600px)": {
+                fontSize: "2rem",
+              },
+      }}
+    >
+    Welcome to CGIFS Portfolio Manager
+    </Typography>
+    
       <LogingFormContainer>
         <form onSubmit={handleSubmit}>
           <Typography
@@ -242,9 +263,17 @@ export default function LogingForm() {
 
 const LogingWrapper = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100vh;
+
+  @media (max-width: 800px) {
+    height: 90vh;
+  }
+  @media (max-width: 600px) {
+    height: 85vh;
+  }
 `;
 
 const LogingFormContainer = styled.div`
