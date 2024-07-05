@@ -95,13 +95,14 @@ export default function FullWidthTabs() {
         color="primary"
         aria-label="logout"
         sx={{
-          position: "absolute",
+          position: "fixed",
           bottom: theme.spacing(2),
           right: theme.spacing(2),
           bgcolor: "#008080",
           "&:hover": {
             bgcolor: "#0C9E9E",
           },
+          zIndex:1000
         }}
         onClick={handleLogoutClick}
       >
