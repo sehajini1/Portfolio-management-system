@@ -72,6 +72,10 @@ export default function LogingForm() {
               "@media (max-width: 700px)": {
                 fontSize: "1.3rem",
               },
+              "@media (max-width: 500px)": {
+                fontSize: "1.2rem",
+                paddingTop:"1.5vh"
+              },
             }}
           >
             Loging to your account
@@ -94,22 +98,25 @@ export default function LogingForm() {
                 sx={{
                   width: "22vw",
                   "@media (max-width: 1100px)": {
-                    width: "27vw",
-                  },
-                  "@media (max-width: 810px)": {
                     width: "30vw",
                   },
-                  "@media (max-width: 750px)": {
-                    width: "35vw",
-                  },
-                  "@media (max-width: 670px)": {
+                  "@media (max-width: 900px)": {
                     width: "40vw",
                   },
-                  "@media (max-width: 550px)": {
+                  "@media (max-width: 750px)": {
+                    width: "46vw",
+                  },
+                  "@media (max-width: 670px)": {
                     width: "48vw",
                   },
+                  "@media (max-width: 550px)": {
+                    width: "65vw",
+                  },
                   "@media (max-width: 470px)": {
-                    width: "52vw",
+                    width: "70vw",
+                  },
+                  "@media (max-width: 400px)": {
+                    width: "75vw",
                   },
                 }}
                 variant="outlined"
@@ -128,22 +135,25 @@ export default function LogingForm() {
                 sx={{
                   width: "22vw",
                   "@media (max-width: 1100px)": {
-                    width: "27vw",
-                  },
-                  "@media (max-width: 810px)": {
                     width: "30vw",
                   },
-                  "@media (max-width: 750px)": {
-                    width: "35vw",
-                  },
-                  "@media (max-width: 670px)": {
+                  "@media (max-width: 900px)": {
                     width: "40vw",
                   },
-                  "@media (max-width: 550px)": {
+                  "@media (max-width: 750px)": {
+                    width: "46vw",
+                  },
+                  "@media (max-width: 670px)": {
                     width: "48vw",
                   },
+                  "@media (max-width: 550px)": {
+                    width: "65vw",
+                  },
                   "@media (max-width: 470px)": {
-                    width: "52vw",
+                    width: "70vw",
+                  },
+                  "@media (max-width: 400px)": {
+                    width: "75vw",
                   },
                 }}
                 variant="outlined"
@@ -188,24 +198,28 @@ export default function LogingForm() {
                   },
                   margin: "2.5vw 0 0 0",
                   "@media (max-width: 1100px)": {
-                    width: "27vw",
-                  },
-                  "@media (max-width: 810px)": {
                     width: "30vw",
                   },
-                  "@media (max-width: 750px)": {
-                    width: "35vw",
-                  },
-                  "@media (max-width: 670px)": {
+                  "@media (max-width: 900px)": {
                     width: "40vw",
                   },
-                  "@media (max-width: 550px)": {
+                  "@media (max-width: 750px)": {
+                    width: "46vw",
+                  },
+                  "@media (max-width: 670px)": {
                     width: "48vw",
                   },
-                  "@media (max-width: 470px)": {
-                    width: "52vw",
-                    fontSize: "0.9rem",
+                  "@media (max-width: 550px)": {
+                    width: "65vw",
                   },
+                  "@media (max-width: 470px)": {
+                    width: "70vw",
+                  },
+                  "@media (max-width: 400px)": {
+                    width: "75vw",
+                    fontSize: "0.9rem"
+                  },
+                  
                 }}
               >
                 {loginMutation.isPending ? "Logging in..." : "Login"}
@@ -246,29 +260,29 @@ const LogingFormContainer = styled.div`
     height: 55vh;
   }
   @media (max-width: 900px) {
-    width: 38vw;
+    width: 45vw;
     height: 50vh;
   }
 
   @media (max-width: 850px) {
-    width: 40vw;
+    width: 50vw;
     height: 50vh;
   }
 
   @media (max-width: 750px) {
-    width: 45vw;
+    width: 55vw;
     height: 50vh;
   }
   @media (max-width: 670px) {
-    width: 50vw;
-    height: 50vh;
-  }
-  @media (max-width: 550px) {
     width: 60vw;
     height: 50vh;
   }
+  @media (max-width: 550px) {
+    width: 75vw;
+    height: 50vh;
+  }
   @media (max-width: 470px) {
-    width: 65vw;
+    width: 85vw;
     height: 50vh;
   }
 `;
@@ -283,5 +297,21 @@ const logingTextStyles = {
 
 const LogingButtonContainer = styled.div`
   margin: auto;
-  padding-top: 3vw;
+  padding-top: 1vw;
+
+  @media (max-width: 800px) {
+    padding-top: 3vw;
+  }
+  @media (max-width: 630px) {
+    padding-top: 4vw;
+  }
+  @media (max-width: 550px) {
+    padding-top: 5vw;
+  }
+  @media (max-width: 450px) {
+    padding-top: 6vw;
+  }
+  @media (max-width: 400px) {
+    padding-top: 7vw;
+  }
 `;

@@ -4,6 +4,7 @@ import Loging from "./Pages/LogingPage";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ProtectedRoute from "./component/ProtectedRoute";
 
 const queryClient = new QueryClient();
 
@@ -13,7 +14,9 @@ function App() {
       <Router>
         <Routes>
           <Route exact path="/" element={<Loging />}></Route>
-          <Route exact path="/details" element={<Home />}></Route>
+          <Route element={<ProtectedRoute />}>
+            <Route path="/details" element={<Home />} />
+          </Route>
         </Routes>
         <ToastContainer />
       </Router>
