@@ -67,6 +67,7 @@ export default function FullWidthTabs() {
 
   const handleLogout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("role");
     setOpenLogoutDialog(false);
     navigate("/");
   };
