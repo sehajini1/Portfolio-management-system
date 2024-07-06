@@ -10,6 +10,7 @@ import {
 } from "@mui/material";
 import { updateMember } from "../../../../API";
 import AddLocationDataMap from "../../locationTab/AddLocationDataMap";
+import { toast } from "react-toastify";
 
 export default function UpdateCustomerModal({
   open,
@@ -50,6 +51,7 @@ export default function UpdateCustomerModal({
       handleClose();
     } catch (error) {
       console.error("Error updating customer:", error);
+      toast.error(`An error occurred: ${error.response.data.message}`);
     }
   };
   console.log(customer);
@@ -74,7 +76,6 @@ export default function UpdateCustomerModal({
           fullWidth
           disabled
           value={latitude}
-          onChange={(e) => setLatitude(e.target.value)}
         />
         <TextField
           margin="dense"
@@ -83,7 +84,6 @@ export default function UpdateCustomerModal({
           fullWidth
           disabled
           value={longitude}
-          onChange={(e) => setLongitude(e.target.value)}
         />
         <Box
           sx={{

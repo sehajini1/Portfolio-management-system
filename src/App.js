@@ -18,7 +18,7 @@ function App() {
             <Route path="/details" element={<Home />} />
           </Route>
         </Routes>
-        <ToastContainer />
+        <ToastContainer autoClose={3000}/>
       </Router>
     </QueryClientProvider>
   );

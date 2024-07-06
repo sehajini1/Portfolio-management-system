@@ -33,6 +33,7 @@ export default function LogingForm() {
       const userRole = decodedToken.role;
       localStorage.setItem("role", userRole);
       navigate("/details");
+      window.location.reload();
     },
     onError: (error) => {
       console.error("Login failed:", error);
@@ -180,11 +181,12 @@ export default function LogingForm() {
                 variant="outlined"
               >
                 <InputLabel htmlFor="outlined-adornment-password">
-                  Password
+                  Password *
                 </InputLabel>
                 <OutlinedInput
                   id="outlined-adornment-password"
                   type={showPassword ? "text" : "password"}
+                  required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   endAdornment={
